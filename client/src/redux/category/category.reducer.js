@@ -3,12 +3,12 @@ import {
   FETCH_CATEGORIES,
   DELETE_CATEGORY,
   FAILURE,
-} from '../action.types';
+} from "../action.types";
 
 export const categories = (state = [], action) => {
   switch (action.type) {
     case FETCH_CATEGORIES:
-      return state;
+      return action.payload;
     case ADD_CATEGORY:
       return action.payload;
     case DELETE_CATEGORY:

@@ -1,13 +1,19 @@
-import axios from 'axios';
+import axios from "axios";
 
-const BASE_URL = 'http://localhost:5000/api/v1';
+const BASE_URL = "http://localhost:5000/api/v1";
+
+const options = {
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+  },
+};
 
 export const registerUser = (user) =>
   axios.post(`${BASE_URL}/users/register`, user);
 
 export const loginUser = (user) => axios.post(`${BASE_URL}/users/login`, user);
 export const getWelcome = () => {
-  axios.get(`${BASE_URL}/users`);
+  axios.get(`${BASE_URL}/users`, options);
 };
 
 export const addProduct = (product) => {
@@ -25,4 +31,4 @@ export const deleteCategory = (category) =>
   axios.post(`${BASE_URL}/deleteCategory`, { _id: category });
 
 export const addCategory = (category) =>
-  axios.post(`${BASE_URL}/addCategory`, category);
+  axios.post(`${BASE_URL}/categories/addCategory`, category);

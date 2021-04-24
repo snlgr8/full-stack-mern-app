@@ -1,5 +1,19 @@
-import React from 'react';
+import React from "react";
+import {
+  Container,
+  ProductImage,
+  ProductName,
+  ProductPriceDetails,
+  ActualPrice,
+  BoughtPrice,
+  Savings,
+  DeleteIcon,
+} from "./categories.styles";
 
-export const Category = () => {
-  return <div></div>;
+export const Category = ({ category }) => {
+  return (
+    <Container>
+      <ProductName>{category.title}</ProductName>
+    </Container>
+  );
 };
