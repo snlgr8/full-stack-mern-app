@@ -14,6 +14,7 @@ app.use(passport.initialize());
 require('./middlewares/auth')(passport);
 app.use('/api/v1/users', require('./routes/auth'));
 app.use('/api/v1/products', require('./routes/products'));
+app.use('/api/v1/categories', require('./routes/categories'));
 app.use(errorHandler);
 
 const server = app.listen(PORT, () => {

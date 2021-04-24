@@ -1,17 +1,17 @@
 import {
-  ADD_PRODUCT,
-  FETCH_PRODUCTS,
+  ADD_CATEGORY,
+  FETCH_CATEGORIES,
+  DELETE_CATEGORY,
   FAILURE,
-  DELETE_PRODUCT,
 } from '../action.types';
 
-export const products = (state = [], action) => {
+export const categories = (state = [], action) => {
   switch (action.type) {
-    case ADD_PRODUCT:
-      return [...state, action.payload];
-    case FETCH_PRODUCTS:
+    case FETCH_CATEGORIES:
+      return state;
+    case ADD_CATEGORY:
       return action.payload;
-    case DELETE_PRODUCT:
+    case DELETE_CATEGORY:
       return action.payload;
     case FAILURE:
       return action.payload;

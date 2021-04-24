@@ -84,6 +84,7 @@ router.post('/addProduct', async (req, res) => {
  * @DESC Delete product based on id
  */
 router.post('/deleteProduct', async (req, res) => {
+  console.log(req.body);
   await deleteProduct(req.body, res);
 });
 /**

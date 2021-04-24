@@ -2,7 +2,7 @@ const { model, Schema } = require('mongoose');
 
 const CategorySchema = new Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
     },
@@ -15,6 +15,11 @@ const CategorySchema = new Schema(
       type: String,
       required: true,
     },
+    tags: [
+      {
+        type: String,
+      },
+    ],
   },
   { timestamps: true }
 );

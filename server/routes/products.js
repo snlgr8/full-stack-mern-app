@@ -10,7 +10,7 @@ const {
 /**
  * @DESC Get all products
  */
-router.get('/getProducts', async (req, res) => {
+router.get('/', async (req, res) => {
   await getProducts(req, res);
 });
 

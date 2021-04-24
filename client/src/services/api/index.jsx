@@ -14,5 +14,15 @@ export const addProduct = (product) => {
   axios.post(`${BASE_URL}/products/addProduct`, product);
 };
 
-export const fetchProducts = () =>
-  axios.get(`${BASE_URL}/products/getProducts`);
+export const fetchProducts = () => axios.get(`${BASE_URL}/products`);
+
+export const deleteProduct = (product) =>
+  axios.post(`${BASE_URL}/products/deleteProduct`, { _id: product });
+
+export const fetchCategories = () => axios.get(`${BASE_URL}/categories`);
+
+export const deleteCategory = (category) =>
+  axios.post(`${BASE_URL}/deleteCategory`, { _id: category });
+
+export const addCategory = (category) =>
+  axios.post(`${BASE_URL}/addCategory`, category);

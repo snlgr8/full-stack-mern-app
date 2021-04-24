@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
-import './App.css';
-import Home from './pages/Home/Home';
 import { useDispatch } from 'react-redux';
-import { fetchWelcome } from './redux/user/user.actions';
-import { Switch, Route } from 'react-router-dom';
-import { Navbar } from './components/Navbar/Navbar.component';
-import { Register } from './components/Auth/Register/Register.component';
+import { Route, Switch } from 'react-router-dom';
+import './App.css';
 import { Login } from './components/Auth/Login/login.component';
-import { Products } from './pages/Products/Products';
-import { Categories } from './pages/Categories/Categories';
-import { ProductList } from './components/Products/product.list';
-import { DeleteProduct } from './components/Products/product.delete';
+import { Register } from './components/Auth/Register/Register.component';
+import { AddCategory } from './components/Categories/category.add';
+import { Navbar } from './components/Navbar/Navbar.component';
 import { AddProduct } from './components/Products/product.add';
+import { Categories } from './pages/Categories/Categories';
+import Home from './pages/Home/Home';
+import { Products } from './pages/Products/Products';
+import { fetchWelcome } from './redux/user/user.actions';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -30,8 +29,8 @@ function App() {
         <Route path='/register' component={Register} />
         <Route path='/products' component={Products} />
         <Route path='/categories' component={Categories} />
-        <Route path='/addProduct' component={AddProduct}></Route>
-        <Route path='/deleteProduct' component={DeleteProduct}></Route>
+        <Route path='/addProduct' component={AddProduct} />
+        <Route path='/addCategory' component={AddCategory} />
       </Switch>
     </div>
   );

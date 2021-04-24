@@ -1,8 +1,8 @@
 const Category = require('../models/Category');
 
-const getCategories = async (res) => {
+const getCategories = async (req, res) => {
   const categories = await Category.find();
-
+  console.log(categories);
   if (categories.length > 0) {
     return res.send(categories);
   }
@@ -10,8 +10,8 @@ const getCategories = async (res) => {
 };
 
 const addCategory = async (category, res) => {
-  const { name } = category;
-  const categoryFromDb = await Category.findOne({ name });
+  const { title } = category;
+  const categoryFromDb = await Category.findOne({ title });
   if (categoryFromDb) {
     return res
       .status(500)

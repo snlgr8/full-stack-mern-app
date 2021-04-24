@@ -1,37 +1,37 @@
 import { Button, Grid } from '@material-ui/core';
-import Add from '@material-ui/icons/Add';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchProducts } from '../../redux/products/products.actions';
-import { Product } from './product.component';
-import useStyles from './products.style';
-export const ProductList = () => {
-  const products = useSelector((state) => state.products);
+import { fetchCategories } from '../../redux/category/category.actions';
+import { Category } from './category.component';
+import useStyles from './categories.styles';
+import Add from '@material-ui/icons/Add';
+
+export const CategoriesList = () => {
+  const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchCategories());
   }, [dispatch]);
-
-  const classes = useStyles();
   return (
     <>
       <div className={classes.btncontainer}>
-        <Link to='/addProduct'>
+        <Link to='/addCategory'>
           <Button
             startIcon={<Add />}
             variant='contained'
             className={classes.addBtn}
           >
-            Add Product
+            Add Category
           </Button>
         </Link>
       </div>
       <Grid container className={classes.root} spacing={2}>
-        {products.length > 0 &&
-          products.map((product) => (
-            <Product product={product} key={product.id} />
+        {categories.length > 0 &&
+          categories.map((category) => (
+            <Category category={category} key={category.id} />
           ))}
       </Grid>
     </>

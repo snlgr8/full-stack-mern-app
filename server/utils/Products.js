@@ -39,7 +39,7 @@ const addProduct = async (product, res) => {
 };
 
 const deleteProduct = async (_id, res) => {
-  await Product.findByIdAndDelete({ _id })
+  await Product.findByIdAndDelete(_id)
     .then(() => {
       return res
         .status(201)
