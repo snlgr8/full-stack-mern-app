@@ -15,7 +15,8 @@ export const AddCategory = () => {
 
   const handleSubmit = async (event) => {};
   const handleChange = async (event) => {
-    const { name, value } = event.target.value;
+    const { name, value } = event.target;
+    console.log(event.target.value);
     setCategory({ ...category, [name]: value });
   };
   return (
