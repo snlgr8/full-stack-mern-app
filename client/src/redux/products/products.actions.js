@@ -8,31 +8,29 @@ import {
 
 export const addProduct = (product) => async (dispatch) => {
   try {
-    const { data } = await api.addProduct(product);
-    if (data?.success) {
-      return dispatch({ type: ADD_PRODUCT, payload: data });
-    }
+    await api.addProduct(product);
+    dispatch({ type: ADD_PRODUCT, payload: product });
   } catch (error) {
-    dispatch({ type: FAILURE, payload: error });
+    dispatch({ type: FAILURE });
   }
 };
 
 export const fetchProducts = () => async (dispatch) => {
   try {
-    const { data } = await api.fetchProducts();
+    let { data } = await api.fetchProducts();
     dispatch({ type: FETCH_PRODUCTS, payload: data });
   } catch (error) {
-    dispatch({ type: FAILURE, payload: error });
+    console.log('in errrrrrrrrrrrrr');
+    dispatch({ type: FAILURE });
   }
 };
 
 export const deleteProduct = (product) => async (dispatch) => {
   try {
     const { data } = await api.deleteProduct(product);
-    if (data?.success) {
-      dispatch({ type: DELETE_PRODUCT, payload: data });
-    }
+    console.log(data);
+    dispatch({ type: DELETE_PRODUCT, payload: data });
   } catch (error) {
-    dispatch({ type: FAILURE, payload: error.message });
+    dispatch({ type: FAILURE });
   }
 };

@@ -1,25 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Rating from '@material-ui/lab/Rating';
 import './products.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { addProduct } from '../../redux/products/products.actions';
+import { Chip, Input, InputLabel, MenuItem, Select } from '@material-ui/core';
+import {
+  fetchCategories,
+  fetchSubType,
+} from '../../redux/category/category.actions';
 const initialState = {
-  name: '',
-  brand: '',
+  name: 'tttttttt001',
+  brand: 'ssss',
   category: '',
   subtype: [],
-  actualPrice: 0,
-  boughtPrice: 0,
+  actualPrice: 100,
+  boughtPrice: 90,
   image: '',
-  rating: 0,
+  rating: 5,
 };
 
 export const AddProduct = () => {
   const [product, setProduct] = useState(initialState);
+  const [subtypes, setSubtypes] = useState([]);
+  const [isCategorySelected, setIsCategorySelected] = useState(true);
+
   const [rating, setRating] = useState(0);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const categories = useSelector((state) => state.categories);
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
   const {
     name,
     actualPrice,
@@ -31,42 +42,57 @@ export const AddProduct = () => {
   } = product;
 
   const fields = [
-    { name: 'name', title: 'Name', type: 'text', value: name },
-    { name: 'brand', title: 'Brand', type: 'text', value: brand },
-    { name: 'category', title: 'Category', type: 'text', value: category },
-    { name: 'subtype', title: 'Subtype', type: 'text', value: subtype },
     {
-      name: 'actualPrice',
-      title: 'Actual Price',
+      name: 'name',
+      title: 'Name',
       type: 'text',
-      value: actualPrice,
+      value: name,
+      class: 'form-input-full',
     },
     {
-      name: 'boughtPrice',
-      title: 'Bought Price',
+      name: 'brand',
+      title: 'Brand',
       type: 'text',
-      value: boughtPrice,
+      value: brand,
+      class: 'form-input-full',
     },
-    { name: 'image', title: 'Image', type: 'text', value: image },
+
+    {
+      name: 'image',
+      title: 'Image',
+      type: 'text',
+      value: image,
+      class: 'form-input-half',
+    },
   ];
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     clearForm();
-
     dispatch(addProduct(product));
+    dispatch(fetchCategories());
   };
 
   const clearForm = () => {
     setProduct(initialState);
+    setSubtypes([]);
     setRating(0);
+    setIsCategorySelected(true);
   };
+
+  const handleChangeSelect = async (event) => {
+    const { name, value } = event.target;
+    setIsCategorySelected(!isCategorySelected);
+    setSubtypes(value.subtype);
+    setProduct({ ...product, [name]: value.title });
+  };
+
   const handleChange = async (event) => {
     const { name, value } = event.target;
     if (name === 'rating') {
       setRating(value);
     }
     setProduct({ ...product, [name]: value });
-    console.log(name, value);
   };
   return (
     <div className='login-screen'>
@@ -88,6 +114,69 @@ export const AddProduct = () => {
           </div>
         ))}
 
+        <div className='form-group-price'>
+          <div className='form-group-product'>
+            <label htmlFor='actualPrice'>Actual Price</label>
+            <input
+              type='number'
+              required
+              name='actualPrice'
+              placeholder='Actual Price'
+              onChange={handleChange}
+              value={actualPrice}
+              tabIndex={1}
+            />
+          </div>
+
+          <div className='form-group-product'>
+            <label htmlFor='boughtPrice'>Bought Price</label>
+            <input
+              type='number'
+              required
+              name='boughtPrice'
+              placeholder='Bought Price'
+              onChange={handleChange}
+              value={boughtPrice}
+              tabIndex={1}
+            />
+          </div>
+        </div>
+
+        <div className='form-group-category'>
+          <div className='form-group-product'>
+            <InputLabel id='category-select'>Category</InputLabel>
+            <Select
+              id='category'
+              value={category.title}
+              name='category'
+              onChange={handleChangeSelect}
+            >
+              {categories.length > 0 &&
+                categories.map((category, index) => (
+                  <MenuItem key={index} value={category}>
+                    {category.title}
+                  </MenuItem>
+                ))}
+            </Select>
+          </div>
+
+          <div className='form-group-product'>
+            <InputLabel id='subtype-select'>Subtype</InputLabel>
+            <Select
+              id='subtype'
+              value={subtype}
+              name='subtype'
+              onChange={handleChange}
+              disabled={isCategorySelected}
+            >
+              {subtypes.map((subtype, index) => (
+                <MenuItem key={index} value={subtype}>
+                  {subtype}
+                </MenuItem>
+              ))}
+            </Select>
+          </div>
+        </div>
         <Rating name='rating' value={rating} onChange={handleChange} />
         <button type='submit' className='btn btn-primary'>
           Add

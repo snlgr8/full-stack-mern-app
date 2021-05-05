@@ -12,9 +12,9 @@ export const products = (state = [], action) => {
     case FETCH_PRODUCTS:
       return action.payload;
     case DELETE_PRODUCT:
-      return action.payload;
+      return state.filter((p) => p._id !== action.payload._id);
     case FAILURE:
-      return action.payload;
+      return state;
     default:
       return state;
   }

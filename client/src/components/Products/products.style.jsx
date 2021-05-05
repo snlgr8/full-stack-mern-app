@@ -41,6 +41,8 @@ const DeleteProductContainer = styled.div`
   display: flex;
   background-color: yellow;
 `;
+
+const SelectContainer = styled.div``;
 export {
   DeleteProductContainer,
   Container,
@@ -51,6 +53,7 @@ export {
   ProductPriceDetails,
   ProductRating,
   ActualPrice,
+  SelectContainer,
 };
 
 export default makeStyles((theme) => ({

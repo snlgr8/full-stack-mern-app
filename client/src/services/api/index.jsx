@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
-const BASE_URL = "http://localhost:5000/api/v1";
+const BASE_URL = 'http://localhost:5000/api/v1';
 
 const options = {
   headers: {
-    "Access-Control-Allow-Origin": "*",
+    'Access-Control-Allow-Origin': '*',
   },
 };
 
@@ -32,3 +32,6 @@ export const deleteCategory = (category) =>
 
 export const addCategory = (category) =>
   axios.post(`${BASE_URL}/categories/addCategory`, category);
+
+export const fetchSubType = (categoryId) =>
+  axios.get(`${BASE_URL}/categories/${categoryId}`);

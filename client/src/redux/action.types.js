@@ -12,3 +12,5 @@ export const FAILURE = 'FAILURE';
 export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+
+export const FETCH_SUBTYPE = 'FETCH_SUBTYPE';

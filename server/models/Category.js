@@ -12,8 +12,8 @@ const CategorySchema = new Schema(
       },
     ],
     icon: {
-      type: String,
-      required: true,
+      data: Buffer,
+      contentType: String,
     },
     tags: [
       {

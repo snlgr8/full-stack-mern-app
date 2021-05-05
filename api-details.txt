@@ -16,3 +16,7 @@ returns token
 To remove background: 
 //https://www.remove.bg/upload
 
+To upload image in database
+https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/
+https://colinrlly.medium.com/send-store-and-show-images-with-react-express-and-mongodb-592bc38a9ed
+https://afteracademy.com/blog/file-upload-with-multer-in-nodejs-and-express

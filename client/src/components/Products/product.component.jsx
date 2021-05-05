@@ -8,12 +8,10 @@ import {
   ActualPrice,
   BoughtPrice,
   ProductRating,
-  DeleteProductContainer,
 } from './products.style';
 import useStyles from './products.style';
 
 import Rating from '@material-ui/lab/Rating';
-import { Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useDispatch } from 'react-redux';
 import { deleteProduct } from '../../redux/products/products.actions';

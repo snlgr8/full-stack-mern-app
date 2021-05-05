@@ -41,9 +41,7 @@ const addProduct = async (product, res) => {
 const deleteProduct = async (_id, res) => {
   await Product.findByIdAndDelete(_id)
     .then(() => {
-      return res
-        .status(201)
-        .json({ message: 'Product deleted', success: true });
+      return res.send(_id);
     })
     .catch((err) => {
       return res.status(500).json({
