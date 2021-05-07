@@ -13,7 +13,8 @@ export const categories = (state = [], action) => {
     case ADD_CATEGORY:
       return [...state, action.payload];
     case DELETE_CATEGORY:
-      return state.filter((category) => category._id !== action.payload._id);
+      console.log(action.payload);
+      return state.filter((category) => category._id !== action.payload);
     case FETCH_SUBTYPE:
       return action.payload;
     case FAILURE:

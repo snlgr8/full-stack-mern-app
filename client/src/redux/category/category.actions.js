@@ -7,8 +7,6 @@ import {
   FETCH_SUBTYPE,
 } from '../action.types';
 
-
-
 export const fetchCategories = () => async (dispatch) => {
   try {
     const { data } = await api.fetchCategories();
@@ -27,7 +25,14 @@ export const addCategory = (category) => async (dispatch) => {
     dispatch({ type: FAILURE, payload: error });
   }
 };
-
+export const deleteCategoryAndProducts = (category) => async (dispatch) => {
+  try {
+    const { data } = await api.deleteCategoryAndProducts(category);
+    dispatch({ type: DELETE_CATEGORY, payload: data });
+  } catch (error) {
+    dispatch({ type: FAILURE, payload: error });
+  }
+};
 export const deleteCategory = (category) => async (dispatch) => {
   try {
     const { data } = await api.deleteCategory(category);

@@ -15,8 +15,10 @@ import Rating from '@material-ui/lab/Rating';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useDispatch } from 'react-redux';
 import { deleteProduct } from '../../redux/products/products.actions';
+import { getImage } from '../../utils/imageDecoding';
 
 export const Product = ({ product }) => {
+  console.log(product);
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -28,7 +30,7 @@ export const Product = ({ product }) => {
   };
   return (
     <Container>
-      <ProductImage src={product.image}></ProductImage>
+      <ProductImage src={getImage(product?.image?.data?.data)}></ProductImage>
       <ProductName>{product.name}</ProductName>
       <ProductPriceDetails>
         <ActualPrice>Actual Price : Rs {product.actualPrice}</ActualPrice>

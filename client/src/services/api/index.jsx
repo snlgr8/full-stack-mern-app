@@ -28,8 +28,12 @@ export const deleteProduct = (product) =>
 export const fetchCategories = () => axios.get(`${BASE_URL}/categories`);
 
 export const deleteCategory = (category) =>
-  axios.post(`${BASE_URL}/deleteCategory`, { _id: category });
+  axios.post(`${BASE_URL}/categories/deleteCategory`, { _id: category });
 
+export const deleteCategoryAndProducts = (category) =>
+  axios.post(`${BASE_URL}/categories/deleteCategoryAndProducts`, {
+    _id: category,
+  });
 export const addCategory = (category) =>
   axios.post(`${BASE_URL}/categories/addCategory`, category);
 

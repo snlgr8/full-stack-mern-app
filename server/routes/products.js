@@ -1,5 +1,5 @@
 const router = require('express').Router();
-
+const upload = require('../utils/imageUpload');
 const {
   getProducts,
   addProduct,
@@ -17,8 +17,8 @@ router.get('/', async (req, res) => {
 /**
  * @DESC Pass products all fields
  *  */
-router.post('/addProduct', async (req, res) => {
-  await addProduct(req.body, res);
+router.post('/addProduct', upload.single('image'), async (req, res) => {
+  await addProduct(req, res);
 });
 /**
  * @DESC Delete product based on id

@@ -18,8 +18,8 @@ const ProductSchema = new Schema(
       type: String,
     },
     image: {
-      type: String,
-      required: true,
+      data: Buffer,
+      contentType: String,
     },
     rating: {
       type: Number,
@@ -30,8 +30,8 @@ const ProductSchema = new Schema(
       },
     ],
     category: {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: 'Category',
     },
   },
   { timestamps: true }

@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import styled from 'styled-components';
 const Container = styled.div`
-  // background-color: green;
+  //background-color: green;
   width: 250px;
   height: 400px;
   //padding: 5px;
@@ -12,10 +12,12 @@ const Container = styled.div`
 `;
 const ProductImage = styled.img`
   width: 200px;
+  height: 200px;
   align-items: center;
 `;
 const ProductName = styled.p`
   font-weight: 700;
+  height: 50px;
   color: #262626;
   //  text-align: center;
   font-size: 14px;
@@ -37,14 +39,9 @@ const BoughtPrice = styled.p`
 const Savings = styled.p`
   font-size: 12px;
 `;
-const DeleteProductContainer = styled.div`
-  display: flex;
-  background-color: yellow;
-`;
 
 const SelectContainer = styled.div``;
 export {
-  DeleteProductContainer,
   Container,
   BoughtPrice,
   Savings,
@@ -60,6 +57,7 @@ export default makeStyles((theme) => ({
   root: {
     display: 'flex',
     margin: '2px',
+    maxWidth: '95%',
     padding: '10px',
   },
   btncontainer: {

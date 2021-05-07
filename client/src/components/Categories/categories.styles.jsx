@@ -1,85 +1,67 @@
-import { makeStyles } from '@material-ui/core';
 import styled from 'styled-components';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 const Container = styled.div`
-  background-color: green;
   width: 250px;
-  height: 200px;
-  //padding: 5px;
+  height: 350px;
+  padding: 5px;
   margin: 10px;
   padding: 5px;
-  // box-shadow: 2px 2px #999999;
-  //  border: 2px solid #e6e6e6;
+  box-shadow: 2px 2px #04b49c;
+  border: 2px solid #04b49c;
+  background-color: #daf1ed;
 `;
 const CategoryIcon = styled.img`
   width: 200px;
   align-items: center;
+  height: 200px;
 `;
 const CategoryName = styled.p`
   font-weight: 700;
   color: #262626;
-  //  text-align: center;
+  text-align: center;
   font-size: 14px;
   font-family: 'Open Sans', sans-serif;
 `;
+const ProductCount = styled.div`
+  display: flex;
+  margin: 3px;
+`;
 const CategoryType = styled.div`
-  padding: 5px;
-  background-color: red;
+  // padding: 5px;
+  padding-left: 5px;
+  display: inline-block;
 `;
-const CategoryTags = styled.div``;
-
-const ActualPrice = styled.p`
-  font-size: 12px;
-  padding-bottom: 3px;
+const CategoryTags = styled.p`
+  // display: inline-block;
+  margin-top: 12px;
+  width: 80%;
+  font-size: 13px;
 `;
-const BoughtPrice = styled.p`
-  font-size: 12px;
-  font-weight: 700;
-`;
-const Savings = styled.p`
-  font-size: 12px;
+const CategoryTypeContainer = styled.div`
+  display: flex;
+  margin: 3px;
 `;
 const DeleteCategoryContainer = styled.div`
   display: flex;
-  background-color: yellow;
+`;
+
+const DeleteIconContainer = styled(DeleteIcon)`
+  cursor: pointer;
+  margin-left: 20px;
+  margin-top: 10px;
+  &:hover {
+    color: red;
+  }
 `;
 export {
   DeleteCategoryContainer,
+  DeleteIconContainer,
   Container,
-  BoughtPrice,
-  Savings,
   CategoryName,
   CategoryIcon,
   CategoryTags,
   CategoryType,
+  ProductCount,
+  CategoryTypeContainer,
 };
-
-export default makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    margin: '2px',
-    padding: '10px',
-  },
-  btncontainer: {
-    justifyContent: 'flex-end',
-    display: 'flex',
-    margin: '15px',
-  },
-  addBtn: {
-    backgroundColor: '#DAF1ED',
-    fontSize: '1rem',
-    cursor: 'pointer',
-    padding: '10px',
-    '&:hover': {
-      opacity: '0.8',
-      backgroundColor: '#48c1a8',
-    },
-  },
-  delete: {
-    cursor: 'pointer',
-    marginLeft: '20px',
-
-    '&:hover': {
-      color: 'red',
-    },
-  },
-}));

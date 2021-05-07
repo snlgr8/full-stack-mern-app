@@ -1,4 +1,5 @@
 const Category = require('../models/Category');
+const Product = require('../models/Product');
 const Img = require('../models/Image');
 const fs = require('fs');
 
@@ -26,6 +27,7 @@ const fetchImage = async (req, res) => {
 
 const addCategory = async (req, res) => {
   const { title, subtype, tags } = req.body;
+  console.log(req.body);
   const categoryFromDb = await Category.findOne({ title });
   if (categoryFromDb) {
     return res
@@ -78,7 +80,14 @@ const deleteCategory = async (category, res) => {
       });
     });
 };
+const deleteCategoryAndProducts = async (req, res) => {
+  const { _id } = req;
+  const { title } = await Category.findById({ _id }).select('title');
+  const products = await Product.find({ category: title });
 
+  console.log(products.length);
+  res.status(200).json({ success: true, message: 'OK' });
+};
 const updateCategory = async (category, res) => {
   const { id } = category;
   Category.findByIdAndUpdate({ _id: id }, category, { new: false })
@@ -111,4 +120,5 @@ module.exports = {
   deleteCategory,
   updateCategory,
   getSubtype,
+  deleteCategoryAndProducts,
 };

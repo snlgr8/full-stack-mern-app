@@ -13,11 +13,11 @@ const initialState = {
   name: 'tttttttt001',
   brand: 'ssss',
   category: '',
-  subtype: [],
+  subtype: [''],
   actualPrice: 100,
   boughtPrice: 90,
   image: '',
-  rating: 5,
+  rating: '0',
 };
 
 export const AddProduct = () => {
@@ -25,7 +25,6 @@ export const AddProduct = () => {
   const [subtypes, setSubtypes] = useState([]);
   const [isCategorySelected, setIsCategorySelected] = useState(true);
 
-  const [rating, setRating] = useState(0);
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
   useEffect(() => {
@@ -36,6 +35,7 @@ export const AddProduct = () => {
     actualPrice,
     boughtPrice,
     image,
+    rating,
     subtype,
     category,
     brand,
@@ -60,8 +60,8 @@ export const AddProduct = () => {
     {
       name: 'image',
       title: 'Image',
-      type: 'text',
-      value: image,
+      type: 'file',
+      accept: 'image/*',
       class: 'form-input-half',
     },
   ];
@@ -69,14 +69,17 @@ export const AddProduct = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     clearForm();
-    dispatch(addProduct(product));
+    const formData = new FormData();
+    Object.keys(product).forEach((key) => {
+      formData.append(key, product[key]);
+    });
+    dispatch(addProduct(formData));
     dispatch(fetchCategories());
   };
 
   const clearForm = () => {
     setProduct(initialState);
     setSubtypes([]);
-    setRating(0);
     setIsCategorySelected(true);
   };
 
@@ -88,10 +91,12 @@ export const AddProduct = () => {
   };
 
   const handleChange = async (event) => {
-    const { name, value } = event.target;
-    if (name === 'rating') {
-      setRating(value);
+    let { name, value } = event.target;
+
+    if (name === 'image') {
+      value = event.target.files[0];
     }
+
     setProduct({ ...product, [name]: value });
   };
   return (
@@ -99,8 +104,8 @@ export const AddProduct = () => {
       <form onSubmit={handleSubmit} className='login-screen__form'>
         <h3 className='login-screen__title'>Add Product</h3>
 
-        {fields.map((field) => (
-          <div className='form-group-product'>
+        {fields.map((field, index) => (
+          <div className='form-group-product' key={index}>
             <label htmlFor={field.name}>{field.title}</label>
             <input
               type={field.type}
@@ -110,6 +115,7 @@ export const AddProduct = () => {
               onChange={handleChange}
               value={field.value}
               tabIndex={1}
+              accept={field?.accept}
             />
           </div>
         ))}
@@ -177,7 +183,11 @@ export const AddProduct = () => {
             </Select>
           </div>
         </div>
-        <Rating name='rating' value={rating} onChange={handleChange} />
+        <Rating
+          name='rating'
+          value={rating.toString()}
+          onChange={handleChange}
+        />
         <button type='submit' className='btn btn-primary'>
           Add
         </button>

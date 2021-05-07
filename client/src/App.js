@@ -7,7 +7,7 @@ import { Register } from './components/Auth/Register/Register.component';
 import { AddCategory } from './components/Categories/category.add';
 import { Navbar } from './components/Navbar/Navbar.component';
 import { AddProduct } from './components/Products/product.add';
-import { Categories } from './pages/Categories/Categories';
+import { Categories } from './pages/Categories/CategoriesPage';
 import Home from './pages/Home/Home';
 import { Products } from './pages/Products/Products';
 import { fetchWelcome } from './redux/user/user.actions';

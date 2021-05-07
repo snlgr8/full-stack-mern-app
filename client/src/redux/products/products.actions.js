@@ -20,7 +20,6 @@ export const fetchProducts = () => async (dispatch) => {
     let { data } = await api.fetchProducts();
     dispatch({ type: FETCH_PRODUCTS, payload: data });
   } catch (error) {
-    console.log('in errrrrrrrrrrrrr');
     dispatch({ type: FAILURE });
   }
 };
@@ -28,7 +27,6 @@ export const fetchProducts = () => async (dispatch) => {
 export const deleteProduct = (product) => async (dispatch) => {
   try {
     const { data } = await api.deleteProduct(product);
-    console.log(data);
     dispatch({ type: DELETE_PRODUCT, payload: data });
   } catch (error) {
     dispatch({ type: FAILURE });

@@ -4,32 +4,44 @@ import { useDispatch } from 'react-redux';
 import { addCategory } from '../../redux/category/category.actions';
 const initialState = {
   title: '',
-  icon: '',
+  icon: undefined,
   subtype: [],
   tags: [],
 };
 
 export const AddCategory = () => {
   const [category, setCategory] = useState(initialState);
-  const { title, icon, tags, subtype } = category;
+  const { title, tags, subtype } = category;
+  const [icon, setIcon] = useState(null);
   const history = useHistory();
   const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const formData = new FormData();
     category.subtype = category.subtype.split(',');
     category.tags = category.tags.split(',');
-    console.log(category);
-    //  dispatch(addCategory(category));
+    formData.append('title', category.title);
+    formData.append('icon', category.icon);
+    category.tags.forEach((tag) => formData.append('tags', tag));
+    category.subtype.forEach((subtype) => formData.append('subtype', subtype));
+    dispatch(addCategory(formData));
     clearForm();
   };
   const clearForm = () => {
     setCategory(initialState);
   };
   const handleChange = async (event) => {
-    const { name, value } = event.target;
+    let { name, value } = event.target;
+    if (name === 'icon') {
+      setIcon(event.target.files[0]);
+      value = event.target.files[0];
+      console.log(value);
+    }
     setCategory({ ...category, [name]: value });
+    console.log(category);
   };
+
   return (
     <div className='login-screen'>
       <form onSubmit={handleSubmit} className='login-screen__form'>
@@ -53,9 +65,8 @@ export const AddCategory = () => {
             type='file'
             required
             name='icon'
-            placeholder='ImageUrl'
+            placeholder='Image'
             onChange={handleChange}
-            value={icon}
             accept='image/*'
           />
         </div>

@@ -1,5 +1,5 @@
 const Product = require('../models/Product');
-
+const fs = require('fs');
 const getProducts = async (req, res) => {
   const products = await Product.find();
 
@@ -8,10 +8,11 @@ const getProducts = async (req, res) => {
   }
   return res.status(404).json({ message: 'No data found', success: false });
 };
-
-const addProduct = async (product, res) => {
+const addProduct = async (req, res) => {
+  const product = req.body;
+  console.log(product);
+  console.log(req.file);
   const { name } = product;
-
   const productFromDb = await Product.findOne({ name });
   if (productFromDb) {
     return res
@@ -19,7 +20,10 @@ const addProduct = async (product, res) => {
       .json({ message: 'Product already exists', success: false });
   }
 
-  const newProduct = new Product({ ...product });
+  const newProduct = new Product({
+    ...product,
+    image: { data: fs.readFileSync(req.file?.path), contentType: 'image/jpeg' },
+  });
   await newProduct
     .save()
     .then(() => {
