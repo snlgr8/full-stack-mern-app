@@ -33,7 +33,7 @@ export const Product = ({ product }) => {
     <Container>
       <ProductImage src={getImage(product?.image?.data?.data)}></ProductImage>
       <ProductName>{product.name}</ProductName>
-      <ProductCategory>Category: {product.category.title}</ProductCategory>
+      <ProductCategory>Category: {product.category?.title}</ProductCategory>
       <ProductPriceDetails>
         <ActualPrice>Actual Price : Rs {product.actualPrice}</ActualPrice>
         <BoughtPrice>Bought At: Rs {product.boughtPrice}</BoughtPrice>

@@ -21,7 +21,7 @@ export const fetchProducts = () => axios.get(`${BASE_URL}/products`);
 
 export const deleteProduct = (product) =>
   axios.post(`${BASE_URL}/products/deleteProduct`, { _id: product });
-
+  
 export const fetchCategories = () => axios.get(`${BASE_URL}/categories`);
 
 export const deleteCategory = (category) =>

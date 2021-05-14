@@ -1,20 +1,32 @@
-import {
-  ADD_PRODUCT,
-  FETCH_PRODUCTS,
-  FAILURE,
-  DELETE_PRODUCT,
-} from '../action.types';
+import * as productActions from '../action.types';
+const initialState = {
+  items: [],
+  isLoading: false,
+  error: null,
+};
 
-export const products = (state = [], action) => {
+export const products = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_PRODUCT:
-      return [...state, action.payload];
-    case FETCH_PRODUCTS:
-      return action.payload;
-    case DELETE_PRODUCT:
-      return state.filter((p) => p._id !== action.payload._id);
-    case FAILURE:
-      return state;
+    case productActions.FETCH_PRODUCTS_BEGINS:
+      return { ...state, isLoading: true, error: null };
+    case productActions.FETCH_PRODUCTS_SUCCESS:
+      return { ...state, isLoading: false, items: action.payload };
+
+    case productActions.ADD_PRODUCT:
+      return { ...state, items: state.items.concat(action.payload) };
+
+    case productActions.DELETE_PRODUCT:
+      return {
+        ...state,
+        items: state.items.filter((p) => p._id !== action.payload._id),
+      };
+    case productActions.FETCH_PRODUCTS_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+        items: [],
+      };
     default:
       return state;
   }

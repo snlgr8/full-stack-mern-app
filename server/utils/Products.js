@@ -38,7 +38,7 @@ const addProduct = async (req, res) => {
       return res.status(200).json({
         message: 'Product added',
         success: true,
-        body: newProduct._id,
+        newProduct,
       });
     })
     .catch((err) => {
