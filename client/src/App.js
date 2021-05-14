@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import { Login } from './components/Auth/Login/login.component';
@@ -11,15 +10,9 @@ import { Categories } from './pages/Categories/CategoriesPage';
 import Home from './pages/Home/Home';
 import { Products } from './pages/Products/Products';
 import { ReportsPage } from './pages/Reports/Reports.Page';
-import { fetchWelcome } from './redux/user/user.actions';
 
 function App() {
-  const [user, setUser] = useState(null);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchWelcome());
-  }, [dispatch]);
+  useEffect(() => {});
 
   return (
     <div>

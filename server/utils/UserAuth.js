@@ -27,7 +27,11 @@ const userRegistration = async (userDetails, role, res) => {
     await newUser.save();
     return res
       .status(201)
-      .json({ message: 'User registration successful', success: true });
+      .json({
+        message: 'User registration successful',
+        success: true,
+        newUser,
+      });
   } catch (err) {
     return res.status(500).json({ message: err.message, success: false });
   }
@@ -88,7 +92,7 @@ const userLogin = async (userDetails, res) => {
       //Success userLogin
       return res
         .status(200)
-        .json({ ...result, message: 'User login success', success: true });
+        .json({ result, message: 'User login success', success: true });
     }
 
     return res.status(500).json({

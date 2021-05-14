@@ -10,33 +10,25 @@ import {
 export const registerUser = (user, history) => async (dispatch) => {
   try {
     const { data } = await api.registerUser(user);
+
     if (data?.success) {
-      const action = { type: REGISTER_USER, payload: data };
       history.push('/');
-      return dispatch(action);
+      dispatch({ type: REGISTER_USER, payload: data });
     }
   } catch (error) {
-    return dispatch({ type: REGISTER_USER_FAILED, payload: error.message });
+    dispatch({ type: REGISTER_USER_FAILED, payload: error.message });
   }
-};
-
-export const fetchWelcome = () => async (dispatch) => {
-  try {
-    const { data } = await api.getWelcome();
-    return dispatch({ type: 'FETCH_WELCOME', payload: data });
-  } catch (error) {}
 };
 
 export const loginUser = (user, history) => async (dispatch) => {
   try {
     const { data } = await api.loginUser(user);
     if (data?.success) {
-      const action = { type: LOGIN_USER, payload: data };
       history.push('/');
-      return dispatch(action);
+      dispatch({ type: LOGIN_USER, payload: data });
     }
   } catch (error) {
-    return dispatch({ type: LOGIN_USER_FAILED, payload: error.message });
+    dispatch({ type: LOGIN_USER_FAILED, payload: error.message });
   }
 };
 

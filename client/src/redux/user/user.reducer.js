@@ -10,17 +10,19 @@ export const user = (state = null, action) => {
   switch (action.type) {
     case REGISTER_USER:
     case LOGIN_USER:
-      localStorage.setItem('user', JSON.stringify({ ...action.payload }));
-      return { ...state, user: action?.payload };
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify({ ...action.payload })
+      );
+      return { ...state, currentUser: action.payload };
 
-    case 'FETCH_WELCOME':
-      return action.payload;
     case REGISTER_USER_FAILED:
     case LOGIN_USER_FAILED:
       return { error: action.payload };
+
     case LOGOUT_USER:
-      localStorage.removeItem('user');
-      return { ...state, user: null };
+      localStorage.removeItem('currentUser');
+      return { ...state, currentUser: null };
     default:
       return state;
   }

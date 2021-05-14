@@ -16,17 +16,19 @@ import useStyles, { ToolbarContainer } from './Navbar.styles';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 export const Navbar = () => {
   const classes = useStyles();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem('currentUser'))
+  );
   const dispatch = useDispatch();
   const location = useLocation();
 
   const history = useHistory();
   const logout = () => {
     dispatch(logoutUser(history));
-    setUser(null);
+    setCurrentUser(null);
   };
   useEffect(() => {
-    const token = user?.token;
+    const token = currentUser?.token;
 
     if (token) {
       const decodedToken = decode(token);
@@ -34,7 +36,7 @@ export const Navbar = () => {
       if (decodedToken.exp * 1000 < new Date().getTime()) logout();
     }
 
-    setUser(JSON.parse(localStorage.getItem('user')));
+    setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
   }, [location]);
 
   return (
@@ -48,7 +50,7 @@ export const Navbar = () => {
           />
         </div>
 
-        {user && (
+        {currentUser && (
           <div className={classes.profile}>
             {menu.map((data) => (
               <Link className={classes.options} to={data.link} key={data.id}>
@@ -70,7 +72,7 @@ export const Navbar = () => {
             </div>
             <div className={classes.endContent}>
               <Avatar className={classes.purple}>
-                {user.data?.name.charAt(0).toUpperCase()}
+                {currentUser.data?.name.charAt(0).toUpperCase()}
               </Avatar>
               <Button
                 className={classes.logout}
