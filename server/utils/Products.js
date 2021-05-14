@@ -15,9 +15,7 @@ const getProducts = async (req, res) => {
 };
 const addProduct = async (req, res) => {
   const product = req.body;
-
   const { name } = product;
-
   const fetchedCategory = await Category.findOne({ title: product.category });
   const productFromDb = await Product.findOne({ name });
   if (productFromDb) {

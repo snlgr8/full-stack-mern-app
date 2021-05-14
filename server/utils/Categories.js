@@ -53,7 +53,7 @@ const addCategory = async (req, res) => {
           return res.status(200).json({
             message: 'Category added',
             success: true,
-            body: category._id,
+            category,
           });
         })
         .catch((err) => {

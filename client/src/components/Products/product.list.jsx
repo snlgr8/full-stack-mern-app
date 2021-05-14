@@ -33,7 +33,6 @@ export const ProductList = () => {
 
   useEffect(() => {
     dispatch(fetchProducts());
-    dispatch(fetchCategories());
   }, [dispatch]);
 
   const classes = useStyles();

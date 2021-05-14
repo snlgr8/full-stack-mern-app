@@ -5,10 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { addProduct } from '../../redux/products/products.actions';
 import { Chip, Input, InputLabel, MenuItem, Select } from '@material-ui/core';
-import {
-  fetchCategories,
-  fetchSubType,
-} from '../../redux/category/category.actions';
+import { fetchCategories } from '../../redux/category/category.actions';
 const initialState = {
   name: 'tttttttt001',
   brand: 'ssss',
@@ -26,7 +23,9 @@ export const AddProduct = () => {
   const [isCategorySelected, setIsCategorySelected] = useState(true);
 
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories);
+  const { categories } = useSelector((state) => ({
+    categories: state.categories.items,
+  }));
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
