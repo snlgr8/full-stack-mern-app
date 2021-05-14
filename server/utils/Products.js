@@ -1,13 +1,12 @@
 const Product = require('../models/Product');
 const fs = require('fs');
 const Category = require('../models/Category');
+const errorHandler = require('../middlewares/error');
+
 const getProducts = async (req, res) => {
-  const products = await Product.find();
-  /*  .populate('Category')
-    .exec(function (err, category) {
-      if (err) return handleError(err);
-      console.log(category);
-    }); */
+  const products = await Product.find()
+    //category is the name of the field in Proucts.
+    .populate('category');
 
   if (products.length > 0) {
     return res.status(200).json(products);
@@ -16,11 +15,10 @@ const getProducts = async (req, res) => {
 };
 const addProduct = async (req, res) => {
   const product = req.body;
-  console.log(product);
-  console.log(req.file);
+
   const { name } = product;
-  const { _id } = await Category.findOne({ title: product.category });
-  console.log(_id);
+
+  const fetchedCategory = await Category.findOne({ title: product.category });
   const productFromDb = await Product.findOne({ name });
   if (productFromDb) {
     return res
@@ -30,10 +28,10 @@ const addProduct = async (req, res) => {
 
   const newProduct = new Product({
     ...product,
-    category: _id,
+    category: fetchedCategory._id,
     image: { data: fs.readFileSync(req.file.path), contentType: 'image/jpeg' },
   });
-  console.log(newProduct);
+
   await newProduct
     .save()
     .then(() => {

@@ -17,7 +17,7 @@ const ProductImage = styled.img`
 `;
 const ProductName = styled.p`
   font-weight: 700;
-  height: 50px;
+  height: auto;
   color: #262626;
   //  text-align: center;
   font-size: 14px;
@@ -39,6 +39,14 @@ const BoughtPrice = styled.p`
 const Savings = styled.p`
   font-size: 12px;
 `;
+const ProductCategory = styled.p`
+  color: #262626;
+  margin-left: 3px;
+  //text-align: center;
+  //background-color: red;
+  font-size: 12px;
+  font-family: 'Open Sans', sans-serif;
+`;
 
 const SelectContainer = styled.div``;
 export {
@@ -51,6 +59,7 @@ export {
   ProductRating,
   ActualPrice,
   SelectContainer,
+  ProductCategory,
 };
 
 export default makeStyles((theme) => ({

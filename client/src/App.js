@@ -10,6 +10,7 @@ import { AddProduct } from './components/Products/product.add';
 import { Categories } from './pages/Categories/CategoriesPage';
 import Home from './pages/Home/Home';
 import { Products } from './pages/Products/Products';
+import { ReportsPage } from './pages/Reports/Reports.Page';
 import { fetchWelcome } from './redux/user/user.actions';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path='/categories' component={Categories} />
         <Route path='/addProduct' component={AddProduct} />
         <Route path='/addCategory' component={AddCategory} />
+        <Route path='/reports' component={ReportsPage} />
       </Switch>
     </div>
   );

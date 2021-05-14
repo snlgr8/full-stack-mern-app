@@ -23,7 +23,8 @@ export const Categories = () => {
     return (
       products &&
       products.filter(
-        (product) => product.category.toLowerCase() === category.toLowerCase()
+        (product) =>
+          product.category.title.toLowerCase() === category.toLowerCase()
       ).length
     );
   };

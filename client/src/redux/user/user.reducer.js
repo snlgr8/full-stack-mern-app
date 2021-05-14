@@ -13,7 +13,7 @@ export const user = (state = null, action) => {
       localStorage.setItem('user', JSON.stringify({ ...action.payload }));
       return { ...state, user: action?.payload };
 
-    case 'FETCH_WE  LCOME':
+    case 'FETCH_WELCOME':
       return action.payload;
     case REGISTER_USER_FAILED:
     case LOGIN_USER_FAILED:
