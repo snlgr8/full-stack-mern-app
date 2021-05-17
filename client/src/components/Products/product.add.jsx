@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { InputLabel, MenuItem, Select } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
-import './products.css';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { addProduct } from '../../redux/products/products.actions';
-import { Chip, Input, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { fetchCategories } from '../../redux/category/category.actions';
+import { addProduct } from '../../redux/products/products.actions';
+
+import './products.css';
 const initialState = {
   name: 'tttttttt001',
   brand: 'ssss',
   category: '',
-  subtype: [''],
+  subtype: '',
   actualPrice: 100,
   boughtPrice: 90,
   image: '',
@@ -29,16 +29,8 @@ export const AddProduct = () => {
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
-  const {
-    name,
-    actualPrice,
-    boughtPrice,
-    image,
-    rating,
-    subtype,
-    category,
-    brand,
-  } = product;
+  const { name, actualPrice, boughtPrice, rating, subtype, category, brand } =
+    product;
 
   const fields = [
     {
@@ -55,25 +47,17 @@ export const AddProduct = () => {
       value: brand,
       class: 'form-input-full',
     },
-
-    {
-      name: 'image',
-      title: 'Image',
-      type: 'file',
-      accept: 'image/*',
-      class: 'form-input-half',
-    },
   ];
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    clearForm();
     const formData = new FormData();
     Object.keys(product).forEach((key) => {
       formData.append(key, product[key]);
     });
     dispatch(addProduct(formData));
-    dispatch(fetchCategories());
+    clearForm();
+    event.target.reset();
   };
 
   const clearForm = () => {
@@ -82,115 +66,131 @@ export const AddProduct = () => {
     setIsCategorySelected(true);
   };
 
+  const getSubtypes = (category) => {
+    return categories.find((c) => c.title === category);
+  };
   const handleChangeSelect = async (event) => {
     const { name, value } = event.target;
     setIsCategorySelected(!isCategorySelected);
-    setSubtypes(value.subtype);
-    setProduct({ ...product, [name]: value.title });
+    const fetchedSubtypes = getSubtypes(value);
+    setSubtypes(fetchedSubtypes.subtype);
+    setProduct({ ...product, [name]: value });
   };
 
   const handleChange = async (event) => {
     let { name, value } = event.target;
-
     if (name === 'image') {
       value = event.target.files[0];
     }
-
     setProduct({ ...product, [name]: value });
   };
   return (
-    <div className='login-screen'>
-      <form onSubmit={handleSubmit} className='login-screen__form'>
-        <h3 className='login-screen__title'>Add Product</h3>
+    <>
+      <div className='product-screen'>
+        <form
+          onSubmit={handleSubmit}
+          className='product-screen__form'
+          name='addProductForm'
+        >
+          <h3 className='product-screen__title'>Add Product</h3>
 
-        {fields.map((field, index) => (
-          <div className='form-group-product' key={index}>
-            <label htmlFor={field.name}>{field.title}</label>
+          {fields.map((field, index) => (
+            <div className='form-group-product' key={index}>
+              <label htmlFor={field.name}>{field.title}</label>
+              <input
+                type={field.type}
+                required
+                name={field.name}
+                placeholder={field.title}
+                onChange={handleChange}
+                value={field.value}
+                tabIndex={1}
+                accept={field?.accept}
+              />
+            </div>
+          ))}
+          <div className='form-group-product'>
+            <label htmlFor='image'>Image</label>
             <input
-              type={field.type}
+              type='file'
               required
-              name={field.name}
-              placeholder={field.title}
+              name='image'
+              placeholder='Image'
               onChange={handleChange}
-              value={field.value}
               tabIndex={1}
-              accept={field?.accept}
+              accept='image/*'
             />
           </div>
-        ))}
 
-        <div className='form-group-price'>
-          <div className='form-group-product'>
-            <label htmlFor='actualPrice'>Actual Price</label>
-            <input
-              type='number'
-              required
-              name='actualPrice'
-              placeholder='Actual Price'
-              onChange={handleChange}
-              value={actualPrice}
-              tabIndex={1}
-            />
+          <div className='form-group-price'>
+            <div className='form-group-product'>
+              <label htmlFor='actualPrice'>Actual Price</label>
+              <input
+                type='number'
+                required
+                name='actualPrice'
+                placeholder='Actual Price'
+                onChange={handleChange}
+                value={actualPrice}
+                tabIndex={1}
+              />
+            </div>
+
+            <div className='form-group-product'>
+              <label htmlFor='boughtPrice'>Bought Price</label>
+              <input
+                type='number'
+                required
+                name='boughtPrice'
+                placeholder='Bought Price'
+                onChange={handleChange}
+                value={boughtPrice}
+                tabIndex={1}
+              />
+            </div>
           </div>
 
-          <div className='form-group-product'>
-            <label htmlFor='boughtPrice'>Bought Price</label>
-            <input
-              type='number'
-              required
-              name='boughtPrice'
-              placeholder='Bought Price'
-              onChange={handleChange}
-              value={boughtPrice}
-              tabIndex={1}
-            />
-          </div>
-        </div>
+          <div className='form-group-category'>
+            <div className='form-group-product'>
+              <InputLabel id='category-select'>Category</InputLabel>
+              <Select
+                id='category'
+                name='category'
+                onChange={handleChangeSelect}
+                value={category}
+              >
+                {categories.length > 0 &&
+                  categories.map((selectValue, index) => (
+                    <MenuItem key={index} value={selectValue.title}>
+                      {selectValue.title}
+                    </MenuItem>
+                  ))}
+              </Select>
+            </div>
 
-        <div className='form-group-category'>
-          <div className='form-group-product'>
-            <InputLabel id='category-select'>Category</InputLabel>
-            <Select
-              id='category'
-              value={category.title}
-              name='category'
-              onChange={handleChangeSelect}
-            >
-              {categories.length > 0 &&
-                categories.map((category, index) => (
-                  <MenuItem key={index} value={category}>
-                    {category.title}
+            <div className='form-group-product'>
+              <InputLabel id='subtype-select'>Subtype</InputLabel>
+              <Select
+                id='subtype'
+                value={subtype}
+                name='subtype'
+                onChange={handleChange}
+                disabled={isCategorySelected}
+              >
+                {subtypes.map((selectedValue, index) => (
+                  <MenuItem key={index} value={selectedValue}>
+                    {selectedValue}
                   </MenuItem>
                 ))}
-            </Select>
+              </Select>
+            </div>
           </div>
-
-          <div className='form-group-product'>
-            <InputLabel id='subtype-select'>Subtype</InputLabel>
-            <Select
-              id='subtype'
-              value={subtype}
-              name='subtype'
-              onChange={handleChange}
-              disabled={isCategorySelected}
-            >
-              {subtypes.map((subtype, index) => (
-                <MenuItem key={index} value={subtype}>
-                  {subtype}
-                </MenuItem>
-              ))}
-            </Select>
-          </div>
-        </div>
-        <Rating
-          name='rating'
-          value={rating.toString()}
-          onChange={handleChange}
-        />
-        <button type='submit' className='btn btn-primary'>
-          Add
-        </button>
-      </form>
-    </div>
+          <Rating name='rating' value={rating} onChange={handleChange} />
+          <button type='submit' className='btn btn-primary'>
+            Add
+          </button>
+        </form>
+      </div>
+    </>
   );
 };

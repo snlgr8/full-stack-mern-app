@@ -31,5 +31,6 @@ export const deleteCategoryAndProducts = (category) =>
   axios.post(`${BASE_URL}/categories/deleteCategoryAndProducts`, {
     _id: category,
   });
-export const addCategory = (category) =>
-  axios.post(`${BASE_URL}/categories/addCategory`, category);
+export const addCategory = (category) => {
+  return axios.post(`${BASE_URL}/categories/addCategory`, category);
+};

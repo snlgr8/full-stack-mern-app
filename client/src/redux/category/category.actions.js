@@ -13,8 +13,8 @@ export const fetchCategories = () => async (dispatch) => {
 
 export const addCategory = (category) => async (dispatch) => {
   try {
-   const { data} =  await api.addCategory(category);
-    dispatch({ type: categoryTypes.ADD_CATEGORY, payload: category });
+    const { data } = await api.addCategory(category);
+    dispatch({ type: categoryTypes.ADD_CATEGORY, payload: data.category });
   } catch (error) {
     dispatch({ type: categoryTypes.FAILURE, payload: error });
   }

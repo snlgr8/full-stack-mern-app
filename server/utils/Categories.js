@@ -45,7 +45,7 @@ const addCategory = async (req, res) => {
   };
   Category.create(category, (err, item) => {
     if (err) {
-      console.log(err);
+      res.status(500).json({ success: false, message: err });
     } else {
       item
         .save()

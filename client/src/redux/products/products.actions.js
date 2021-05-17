@@ -4,7 +4,6 @@ import * as productActions from '../action.types';
 export const addProduct = (product) => async (dispatch) => {
   try {
     const { data } = await api.addProduct(product);
-    console.log(data.newProduct);
     dispatch({ type: productActions.ADD_PRODUCT, payload: data.newProduct });
   } catch (error) {
     dispatch({ type: productActions.FAILURE, payload: error });

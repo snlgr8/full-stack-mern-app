@@ -19,7 +19,6 @@ import { deleteProduct } from '../../redux/products/products.actions';
 import { getImage } from '../../utils/imageDecoding';
 
 export const Product = ({ product }) => {
-  console.log(product);
   const classes = useStyles();
   const dispatch = useDispatch();
 
