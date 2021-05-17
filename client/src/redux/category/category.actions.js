@@ -14,6 +14,8 @@ export const fetchCategories = () => async (dispatch) => {
 export const addCategory = (category) => async (dispatch) => {
   try {
     const { data } = await api.addCategory(category);
+    console.log(data);
+
     dispatch({ type: categoryTypes.ADD_CATEGORY, payload: data.category });
   } catch (error) {
     dispatch({ type: categoryTypes.FAILURE, payload: error });
@@ -22,6 +24,7 @@ export const addCategory = (category) => async (dispatch) => {
 export const deleteCategoryAndProducts = (category) => async (dispatch) => {
   try {
     const { data } = await api.deleteCategoryAndProducts(category);
+    console.log(data);
     dispatch({ type: categoryTypes.DELETE_CATEGORY, payload: data });
   } catch (error) {
     dispatch({ type: categoryTypes.FAILURE, payload: error });

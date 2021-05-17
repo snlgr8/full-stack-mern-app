@@ -39,15 +39,13 @@ export const Category = ({ category, countOfProducts }) => {
   };
   const handleDelete = () => {
     if (isDeleteAll) {
-      console.log('To delete all');
       dispatch(deleteCategoryAndProducts(category._id));
     } else {
-      console.log('To delete single');
       dispatch(deleteCategory(category._id));
     }
     handleClose();
   };
-  const removeCategory = (category) => {
+  const setDialogData = () => {
     if (countOfProducts < 1) {
       setDialogDetails({
         open: true,
@@ -80,7 +78,11 @@ export const Category = ({ category, countOfProducts }) => {
       ></CategoryIcon>
       <CategoryTypeContainer>
         <p>Type:</p>
-        <CategoryType>{joinArray(category.subtype, ',')}</CategoryType>
+        <CategoryType>
+          {typeof category.subtype !== 'string'
+            ? joinArray(category.subtype, ',')
+            : category.subtype}
+        </CategoryType>
       </CategoryTypeContainer>
 
       <ProductCount>
@@ -91,11 +93,13 @@ export const Category = ({ category, countOfProducts }) => {
         )}
       </ProductCount>
       <DeleteCategoryContainer>
-        <CategoryTags>#{joinArray(category.tags, ' #')}</CategoryTags>
-        <DeleteIconContainer
-          color='error'
-          onClick={() => removeCategory(category)}
-        />
+        <CategoryTags>
+          #
+          {typeof category.tags !== 'string'
+            ? joinArray(category.tags, ' #')
+            : category.tags}
+        </CategoryTags>
+        <DeleteIconContainer color='error' onClick={() => setDialogData()} />
       </DeleteCategoryContainer>
 
       <CustomDialog

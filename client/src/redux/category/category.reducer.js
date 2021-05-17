@@ -9,7 +9,10 @@ export const categories = (state = initialState, action) => {
     case categoryTypes.FETCH_CATEGORIES:
       return { ...state, items: action.payload };
     case categoryTypes.ADD_CATEGORY:
-      return { ...state, items: state.items.concat(action.payload) };
+      return {
+        ...state,
+        items: state.items.concat(action.payload),
+      };
     case categoryTypes.DELETE_CATEGORY:
       return {
         ...state,

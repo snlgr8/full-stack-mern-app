@@ -5,7 +5,7 @@ const {
   addCategory,
   getSubtype,
   deleteCategoryAndProducts,
-} = require('../utils/Categories');
+} = require('../controllers/Categories');
 
 const router = require('express').Router();
 const upload = require('../utils/imageUpload');

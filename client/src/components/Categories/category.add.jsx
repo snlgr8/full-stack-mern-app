@@ -25,8 +25,10 @@ export const AddCategory = () => {
     formData.append('icon', category.icon);
     category.tags.forEach((tag) => formData.append('tags', tag));
     category.subtype.forEach((subtype) => formData.append('subtype', subtype));
+    console.log(formData.getAll('subtype'));
     dispatch(addCategory(formData));
     clearForm();
+    event.target.reset();
   };
   const clearForm = () => {
     setCategory(initialState);
@@ -39,7 +41,6 @@ export const AddCategory = () => {
       console.log(value);
     }
     setCategory({ ...category, [name]: value });
-    console.log(category);
   };
 
   return (

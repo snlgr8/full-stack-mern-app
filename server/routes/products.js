@@ -5,7 +5,7 @@ const {
   addProduct,
   deleteProduct,
   updateProduct,
-} = require('../utils/Products');
+} = require('../controllers/Products');
 
 /**
  * @DESC Get all products

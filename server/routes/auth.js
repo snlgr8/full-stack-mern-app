@@ -4,7 +4,7 @@ const {
   userLogin,
   userAuth,
   forgotPassword,
-} = require('../controllers/users');
+} = require('../controllers/UserAuth');
 const {
   getCategories,
   addCategory,

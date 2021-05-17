@@ -9,23 +9,24 @@ import Add from '@material-ui/icons/Add';
 import { fetchProducts } from '../../redux/products/products.actions';
 
 export const Categories = () => {
-  const categories = useSelector((state) => state.categories);
-  const products = useSelector((state) => state.products);
+  const { categories } = useSelector((state) => ({
+    categories: state.categories.items,
+  }));
+  const { products } = useSelector((state) => ({
+    products: state.products.items,
+  }));
   const dispatch = useDispatch();
   const classes = useStyles();
   useEffect(() => {
     dispatch(fetchCategories());
-    dispatch(fetchProducts());
   }, [dispatch]);
 
   const countOfProductsPerCategory = (category) => {
     //Fetch products based on category
+    // TODO: to add count of products in categories
     return (
       products &&
-      products.filter(
-        (product) =>
-          product.category.title.toLowerCase() === category.toLowerCase()
-      ).length
+      products.filter((product) => product.category._id === category._id).length
     );
   };
 
@@ -51,7 +52,7 @@ export const Categories = () => {
             <Category
               category={category}
               key={category.id}
-              countOfProducts={countOfProductsPerCategory(category.title)}
+              countOfProducts={countOfProductsPerCategory(category)}
             />
           ))}
       </Grid>

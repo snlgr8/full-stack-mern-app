@@ -1,4 +1,5 @@
 const { model, Schema } = require('mongoose');
+const Product = require('./Product');
 
 const CategorySchema = new Schema(
   {
@@ -24,19 +25,14 @@ const CategorySchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = model('Category', CategorySchema);
-
-CategorySchema.pre('deleteOne', function (next) {
-  var category = this;
-  console.log('In pre---------');
-  /*  category
-    .model('Product')
-    .deleteOne({ category: category._id }, function (err, product) {
-      if (err) {
-        console.log(err);
-        next(err);
-      }
-      console.log(product);
-      next();
-    }); */
+CategorySchema.pre('deleteOne', async function () {
+  let deletedItemId =
+    this._conditions && this._conditions._id ? this._conditions._id : null;
+  if (deletedItemId) {
+    await Product.deleteMany({
+      category: deletedItemId,
+    });
+  }
 });
+
+module.exports = model('Category', CategorySchema);
