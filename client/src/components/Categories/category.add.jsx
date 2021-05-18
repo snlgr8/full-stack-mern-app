@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCategory } from '../../redux/category/category.actions';
+import { Input } from '../Forms/Input';
+import './category.style.css';
 const initialState = {
   title: '',
   icon: undefined,
@@ -47,63 +48,56 @@ export const AddCategory = () => {
   const handleChange = async (event) => {
     let { name, value } = event.target;
     if (name === 'icon') {
-      //setIcon(event.target.files[0]);
       value = event.target.files[0];
     }
     setCategory({ ...category, [name]: value });
   };
 
   return (
-    <div className='login-screen'>
-      <form onSubmit={handleSubmit} className='login-screen__form'>
-        <h3 className='login-screen__title'>Add Category</h3>
+    <div className='category-screen'>
+      <form onSubmit={handleSubmit} className='category-screen__form'>
+        <h3 className='category-screen__title'>Add Category</h3>
         {error && <span className='error-message'>{error}</span>}
-        <div className='form-group-product'>
-          <label htmlFor='title'>Title</label>
-          <input
-            type='text'
-            required
-            name='title'
-            placeholder='Title'
-            onChange={handleChange}
-            value={title}
-          />
-        </div>
 
-        <div className='form-group-product'>
-          <label htmlFor='image'>Image</label>
-          <input
-            type='file'
-            required
-            name='icon'
-            placeholder='Image'
-            onChange={handleChange}
-            accept='image/*'
-          />
-        </div>
-        <div className='form-group-product'>
-          <label htmlFor='subtype'>Subtype</label>
-          <input
-            type='text'
-            required
-            name='subtype'
-            placeholder='Subtype'
-            onChange={handleChange}
-            value={subtype}
-          />
-        </div>
+        <Input
+          classes='form-group-input'
+          label='Title'
+          type='text'
+          name='title'
+          placeholder='Title'
+          handleChange={handleChange}
+          value={title}
+        />
 
-        <div className='form-group-product'>
-          <label htmlFor='tags'>Tags</label>
-          <input
-            type='text'
-            required
-            name='tags'
-            placeholder='Tags'
-            onChange={handleChange}
-            value={tags}
-          />
-        </div>
+        <Input
+          classes='form-group-input'
+          label='Image'
+          type='file'
+          name='icon'
+          placeholder='Image'
+          handleChange={handleChange}
+          accept='image/*'
+        />
+
+        <Input
+          classes='form-group-input'
+          label='Subtype'
+          type='text'
+          name='subtype'
+          placeholder='Subtype'
+          handleChange={handleChange}
+          value={subtype}
+        />
+
+        <Input
+          classes='form-group-input'
+          type='text'
+          label='Tags'
+          name='tags'
+          placeholder='Tags'
+          handleChange={handleChange}
+          value={tags}
+        />
 
         <button type='submit' className='btn btn-primary'>
           Add

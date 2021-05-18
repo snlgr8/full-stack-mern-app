@@ -1,3 +1,28 @@
 .login-screen__forgotpassword {
   font-size: 0.7rem;
 }
+.form-group-input,
+.form-group-input label,
+.form-group-input input {
+  width: 100%;
+  padding: 2px;
+}
+.MuiSelect-select {
+  min-width: 180px !important;
+}
+
+.form-group-input label {
+  font-size: 0.8rem;
+}
+
+.form-group-input input {
+  padding: 10px 20px;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background-color: #eee;
+  outline-width: 0;
+  font-size: 1rem;
+}
+.form-group-input input:focus {
+  border-bottom: 3px solid #ffff80;
+}

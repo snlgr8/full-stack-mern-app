@@ -1,0 +1,72 @@
+.category-container {
+  width: 250px;
+  height: 350px;
+  padding: 5px;
+  margin: 10px;
+  padding: 5px;
+  box-shadow: 2px 2px #04b49c;
+  border: 2px solid #04b49c;
+  background-color: #daf1ed;
+}
+.category-container__icon {
+  width: 200px;
+  align-items: center;
+  height: 200px;
+}
+
+.category-container__title {
+  font-weight: 700;
+  color: #262626;
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.category-container__count {
+  display: flex;
+  margin: 3px;
+}
+
+.category-container__type {
+  padding-left: 5px;
+  display: inline-block;
+}
+
+.category-container__tags {
+  margin-top: 12px;
+  width: 80%;
+  font-size: 13px;
+}
+
+.category-container__delete {
+  display: flex;
+}
+.category-screen {
+  width: 100%;
+  height: 89vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-screen__form {
+  width: 380px;
+  padding: 1.5rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  background: #fff;
+}
+
+.category-screen__title {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.category-screen__forgotpassword {
+  font-size: 0.7rem;
+}
+
+.category-screen__subtext {
+  font-size: 0.7rem;
+  display: block;
+  margin: 0.5rem 0;
+}

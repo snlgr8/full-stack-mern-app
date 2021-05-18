@@ -7,8 +7,8 @@ import { addProduct } from '../../redux/products/products.actions';
 
 import './products.css';
 const initialState = {
-  name: 'tttttttt001',
-  brand: 'ssss',
+  name: 'Sample',
+  brand: 'ABC Brand',
   category: '',
   subtype: '',
   actualPrice: 100,

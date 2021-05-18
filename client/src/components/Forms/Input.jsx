@@ -9,6 +9,7 @@ export const Input = (props) => {
     label,
     classes,
     handleChange,
+    accept,
     children,
   } = props;
 
@@ -24,6 +25,7 @@ export const Input = (props) => {
         onChange={handleChange}
         value={value}
         tabIndex={1}
+        accept={accept}
       />
     </div>
   );

@@ -6,17 +6,10 @@ import {
 } from '../../redux/category/category.actions';
 import { CustomDialog } from '../../utils/Dialog';
 import { getImage } from '../../utils/imageDecoding';
-import {
-  CategoryIcon,
-  CategoryName,
-  CategoryTags,
-  CategoryType,
-  CategoryTypeContainer,
-  Container,
-  DeleteCategoryContainer,
-  DeleteIconContainer,
-  ProductCount,
-} from './categories.styles';
+
+import DeleteIcon from '@material-ui/icons/Delete';
+
+import './category.style.css';
 const initialDialogDetailsState = {
   open: false,
   dialogContent: 'Are you sure?',
@@ -55,7 +48,6 @@ export const Category = ({ category, countOfProducts }) => {
         cancelButtonText: 'No',
         maxWidth: 'xs',
       });
-      // dispatch(deleteCategory(category._id));
     } else {
       setDialogDetails({
         open: true,
@@ -70,43 +62,56 @@ export const Category = ({ category, countOfProducts }) => {
     }
   };
   return (
-    <Container>
-      <CategoryName>{category.title}</CategoryName>
-      <CategoryIcon
+    <div className='category-container'>
+      <p className='category-container__title'>{category.title}</p>
+      <img
+        className='category-container__icon'
         src={getImage(category.icon?.data?.data)}
         alt={category.icon}
-      ></CategoryIcon>
-      <CategoryTypeContainer>
-        <p>Type:</p>
-        <CategoryType>
+      ></img>
+
+      <div className='category-container__type'>
+        <span>Type:</span>
+        <span>
           {typeof category.subtype !== 'string'
             ? joinArray(category.subtype, ',')
             : category.subtype}
-        </CategoryType>
-      </CategoryTypeContainer>
+        </span>
+      </div>
 
-      <ProductCount>
+      <div className='category-container__count'>
         {countOfProducts < 1 ? (
           `No Products`
         ) : (
           <p>Number of products: {countOfProducts}</p>
         )}
-      </ProductCount>
-      <DeleteCategoryContainer>
-        <CategoryTags>
+      </div>
+      <div className='category-container__delete'>
+        <p className='category-container__tags'>
           #
           {typeof category.tags !== 'string'
             ? joinArray(category.tags, ' #')
             : category.tags}
-        </CategoryTags>
-        <DeleteIconContainer color='error' onClick={() => setDialogData()} />
-      </DeleteCategoryContainer>
+        </p>
+        <DeleteIcon
+          style={{
+            cursor: 'pointer',
+            marginLeft: '1rem',
+            marginTop: '0.4rem',
+            '&:hover': {
+              background: '#efefef',
+            },
+          }}
+          color='error'
+          onClick={() => setDialogData()}
+        />
+      </div>
 
       <CustomDialog
         handleClose={handleClose}
         handleDelete={handleDelete}
         dialogDetails={dialogDetails}
       ></CustomDialog>
-    </Container>
+    </div>
   );
 };
