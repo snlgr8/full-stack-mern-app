@@ -1,0 +1,24 @@
+.product-container-list {
+  justify-content: flex-end;
+  display: flex;
+  margin: 15px;
+}
+
+.product-container__Add {
+  background-color: #daf1ed;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.product-container__Add :hover {
+  opacity: 0.8;
+  background-color: #48c1a8;
+}
+
+.product-container__root {
+  display: flex;
+  margin: 2px;
+  max-width: 95%;
+  padding: 10px;
+}
