@@ -1,18 +1,30 @@
-import React from 'react'
+import React from 'react';
 
-export const Input = ({...props}) => {
-    return (
-        <div className='form-group'>
-        <label htmlFor='name'>Brand:</label>
-        <input
-          type='text'
-          required
-          name='brand'
-          placeholder='Brand'
-          onChange={handleChange}
-          value={brand}
-          tabIndex={1}
-        />
-      </div>
-    )
-}
+export const Input = (props) => {
+  const {
+    name,
+    type,
+    placeholder,
+    value,
+    label,
+    classes,
+    handleChange,
+    children,
+  } = props;
+
+  return (
+    <div className={classes}>
+      <label htmlFor={name}>{label}:</label>
+      {children}
+      <input
+        type={type}
+        required
+        name={name}
+        placeholder={placeholder}
+        onChange={handleChange}
+        value={value}
+        tabIndex={1}
+      />
+    </div>
+  );
+};

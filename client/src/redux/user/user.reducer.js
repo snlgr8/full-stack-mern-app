@@ -6,7 +6,11 @@ import {
   LOGIN_USER_FAILED,
 } from '../action.types';
 
-export const user = (state = null, action) => {
+const userState = {
+  error: null,
+  currentUser: null,
+};
+export const user = (state = userState, action) => {
   switch (action.type) {
     case REGISTER_USER:
     case LOGIN_USER:
@@ -14,15 +18,15 @@ export const user = (state = null, action) => {
         'currentUser',
         JSON.stringify({ ...action.payload })
       );
-      return { ...state, currentUser: action.payload };
+      return { ...state, currentUser: action.payload, error: null };
 
     case REGISTER_USER_FAILED:
     case LOGIN_USER_FAILED:
-      return { error: action.payload };
+      return { error: action.payload, currentUser: null };
 
     case LOGOUT_USER:
       localStorage.removeItem('currentUser');
-      return { ...state, currentUser: null };
+      return { ...state, currentUser: null, error: null };
     default:
       return state;
   }

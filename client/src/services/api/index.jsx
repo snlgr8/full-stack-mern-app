@@ -8,10 +8,13 @@ const options = {
   },
 };
 
-export const registerUser = (user) =>
-  axios.post(`${BASE_URL}/users/register`, user);
+export const registerUser = (user) => {
+  return axios.post(`${BASE_URL}/users/register`, user);
+};
 
-export const loginUser = (user) => axios.post(`${BASE_URL}/users/login`, user);
+export const loginUser = (user) => {
+  return axios.post(`${BASE_URL}/users/login`, user);
+};
 
 export const addProduct = (product) => {
   return axios.post(`${BASE_URL}/products/addProduct`, product);

@@ -10,13 +10,13 @@ const {
   addCategory,
   deleteCategory,
   updateCategory,
-} = require('../utils/Categories');
+} = require('../controllers/Categories');
 const {
   getProducts,
   addProduct,
   deleteProduct,
   updateProduct,
-} = require('../utils/Products');
+} = require('../controllers/Products');
 
 /**
  * @DESC This is a test api by default

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { registerUser } from '../../../redux/user/user.actions';
 import { DialogComponent } from '../Dialog/Dialog.component';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './Register.css';
 const initialState = {
   displayName: '',
@@ -15,7 +15,7 @@ export const Register = () => {
   const [userProfileDetails, setUserProfileDetails] = useState(initialState);
   const history = useHistory();
   const { displayName, email, password, confirmPassword } = userProfileDetails;
-  const [error, setError] = useState('');
+  const error = useSelector((state) => state.user.error);
   const dispatch = useDispatch();
   const handleChange = (event) => {
     const { name, value } = event.target;
