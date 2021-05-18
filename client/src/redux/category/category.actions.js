@@ -2,39 +2,56 @@ import * as api from '../../services/api';
 import * as categoryTypes from '../action.types';
 
 export const fetchCategories = () => async (dispatch) => {
-  try {
-    const { data } = await api.fetchCategories();
-
-    dispatch({ type: categoryTypes.FETCH_CATEGORIES, payload: data });
-  } catch (error) {
-    dispatch({ type: categoryTypes.FAILURE, payload: error });
-  }
+  await api
+    .fetchCategories()
+    .then(({ data }) => {
+      console.log(data);
+      dispatch({ type: categoryTypes.FETCH_CATEGORIES, payload: data });
+    })
+    .catch((error) => {
+      dispatch({
+        type: categoryTypes.FAILURE,
+        payload: error.response.data.message,
+      });
+    });
 };
 
 export const addCategory = (category) => async (dispatch) => {
-  try {
-    const { data } = await api.addCategory(category);
-    console.log(data);
-
-    dispatch({ type: categoryTypes.ADD_CATEGORY, payload: data.category });
-  } catch (error) {
-    dispatch({ type: categoryTypes.FAILURE, payload: error });
-  }
+  await api
+    .addCategory(category)
+    .then(({ data }) => {
+      dispatch({ type: categoryTypes.ADD_CATEGORY, payload: data.category });
+    })
+    .catch((error) => {
+      dispatch({
+        type: categoryTypes.FAILURE,
+        payload: error.response.data.message,
+      });
+    });
 };
 export const deleteCategoryAndProducts = (category) => async (dispatch) => {
-  try {
-    const { data } = await api.deleteCategoryAndProducts(category);
-    console.log(data);
-    dispatch({ type: categoryTypes.DELETE_CATEGORY, payload: data });
-  } catch (error) {
-    dispatch({ type: categoryTypes.FAILURE, payload: error });
-  }
+  await api
+    .deleteCategoryAndProducts(category)
+    .then(({ data }) => {
+      dispatch({ type: categoryTypes.DELETE_CATEGORY, payload: data });
+    })
+    .catch((error) => {
+      dispatch({
+        type: categoryTypes.FAILURE,
+        payload: error.response.data.message,
+      });
+    });
 };
 export const deleteCategory = (category) => async (dispatch) => {
-  try {
-    const { data } = await api.deleteCategory(category);
-    dispatch({ type: categoryTypes.DELETE_CATEGORY, payload: data });
-  } catch (error) {
-    dispatch({ type: categoryTypes.FAILURE, payload: error });
-  }
+  await api
+    .deleteCategory(category)
+    .then(({ data }) => {
+      dispatch({ type: categoryTypes.DELETE_CATEGORY, payload: data });
+    })
+    .catch((error) => {
+      dispatch({
+        type: categoryTypes.FAILURE,
+        payload: error.response.data.message,
+      });
+    });
 };

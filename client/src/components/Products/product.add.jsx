@@ -21,7 +21,9 @@ export const AddProduct = () => {
   const [product, setProduct] = useState(initialState);
   const [subtypes, setSubtypes] = useState([]);
   const [isCategorySelected, setIsCategorySelected] = useState(true);
-
+  const { error } = useSelector((state) => ({
+    error: state.products.error,
+  }));
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => ({
     categories: state.categories.items,
@@ -93,7 +95,7 @@ export const AddProduct = () => {
           name='addProductForm'
         >
           <h3 className='product-screen__title'>Add Product</h3>
-
+          {error && <span className='error-message'>{error}</span>}
           {fields.map((field, index) => (
             <div className='form-group-product' key={index}>
               <label htmlFor={field.name}>{field.title}</label>

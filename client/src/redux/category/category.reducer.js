@@ -7,11 +7,12 @@ const initialState = {
 export const categories = (state = initialState, action) => {
   switch (action.type) {
     case categoryTypes.FETCH_CATEGORIES:
-      return { ...state, items: action.payload };
+      return { ...state, items: action.payload, error: null };
     case categoryTypes.ADD_CATEGORY:
       return {
         ...state,
         items: state.items.concat(action.payload),
+        error: null,
       };
     case categoryTypes.DELETE_CATEGORY:
       return {
@@ -19,6 +20,7 @@ export const categories = (state = initialState, action) => {
         items: state.items.filter(
           (category) => category._id !== action.payload
         ),
+        error: null,
       };
     case categoryTypes.FAILURE:
       return { ...state, items: [], error: action.payload };

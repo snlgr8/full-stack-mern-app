@@ -6,7 +6,6 @@ import { fetchCategories } from '../../redux/category/category.actions';
 import { Category } from '../../components/Categories/category';
 import useStyles from './Categories.page.styles';
 import Add from '@material-ui/icons/Add';
-import { fetchProducts } from '../../redux/products/products.actions';
 
 export const Categories = () => {
   const { categories } = useSelector((state) => ({

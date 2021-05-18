@@ -1,23 +1,19 @@
-import React, { useState } from 'react';
-import { Input } from '../../components/Forms/Input';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchCategories } from '../../redux/category/category.actions';
+import { fetchProducts } from '../../redux/products/products.actions';
+import './Home.style.css';
 
 const Home = () => {
-  const [val, setVal] = useState('');
-  const handleChange = (e) => {
-    setVal(e.target.value);
-  };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   return (
-    <div>
-      <Input
-        name='username'
-        value={val}
-        placeholder='Enter username'
-        type='text'
-        handleChange={handleChange}
-        label='Username'
-        classes='n'
-      />
+    <div className='home-container'>
+      <h1>Welcome</h1>
     </div>
   );
 };

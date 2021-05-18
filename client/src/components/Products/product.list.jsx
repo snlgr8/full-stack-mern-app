@@ -3,7 +3,6 @@ import Add from '@material-ui/icons/Add';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchCategories } from '../../redux/category/category.actions';
 import { fetchProducts } from '../../redux/products/products.actions';
 import { Product } from './product';
 import useStyles from './products.style';
