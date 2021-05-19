@@ -1,5 +1,5 @@
-import { Button, Grid, Typography } from '@material-ui/core';
-import Add from '@material-ui/icons/Add';
+import { Grid, Typography } from '@material-ui/core';
+
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -10,6 +10,7 @@ import BounceLoader from 'react-spinners/BounceLoader';
 import { css } from '@emotion/core';
 
 import './Product.style.css';
+import { CustomButton } from '../../components/Forms/Button';
 const override = css`
   display: block;
   margin: 0 auto;
@@ -33,13 +34,7 @@ export const Products = () => {
     <>
       <div className='product-container-list'>
         <Link to='/addProduct'>
-          <Button
-            startIcon={<Add />}
-            variant='contained'
-            className='product-container__Add'
-          >
-            Add Product
-          </Button>
+          <CustomButton text='Add Product' />
         </Link>
       </div>
       <BounceLoader

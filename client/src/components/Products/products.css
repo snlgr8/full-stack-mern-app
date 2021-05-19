@@ -55,9 +55,7 @@
   justify-content: center;
   align-items: center;
 }
-.form-group-product,
-.form-group-product label,
-.form-group-product input {
+.form-group-product {
   width: 100%;
   padding: 2px;
 }

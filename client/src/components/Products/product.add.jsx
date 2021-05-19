@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategories } from '../../redux/category/category.actions';
 import { addProduct } from '../../redux/products/products.actions';
+import { Input } from '../Forms/Input';
 
 import './products.css';
 const initialState = {
@@ -97,59 +98,49 @@ export const AddProduct = () => {
           <h3 className='product-screen__title'>Add Product</h3>
           {error && <span className='error-message'>{error}</span>}
           {fields.map((field, index) => (
-            <div className='form-group-product' key={index}>
-              <label htmlFor={field.name}>{field.title}</label>
-              <input
-                type={field.type}
-                required
-                name={field.name}
-                placeholder={field.title}
-                onChange={handleChange}
-                value={field.value}
-                tabIndex={1}
-                accept={field?.accept}
-              />
-            </div>
-          ))}
-          <div className='form-group-product'>
-            <label htmlFor='image'>Image</label>
-            <input
-              type='file'
-              required
-              name='image'
-              placeholder='Image'
-              onChange={handleChange}
-              tabIndex={1}
-              accept='image/*'
+            <Input
+              key={index}
+              label={field.title}
+              classes='form-group-input'
+              type={field.type}
+              name={field.name}
+              placeholder={field.title}
+              handleChange={handleChange}
+              value={field.value}
+              accept={field?.accept}
             />
-          </div>
+          ))}
+
+          <Input
+            classes='form-group-input'
+            type='file'
+            name='image'
+            label='Image'
+            placeholder='Image'
+            handleChange={handleChange}
+            accept='image/*'
+          />
 
           <div className='form-group-price'>
-            <div className='form-group-product'>
-              <label htmlFor='actualPrice'>Actual Price</label>
-              <input
-                type='number'
-                required
-                name='actualPrice'
-                placeholder='Actual Price'
-                onChange={handleChange}
-                value={actualPrice}
-                tabIndex={1}
-              />
-            </div>
+            <Input
+              type='number'
+              label='Actual Price'
+              name='actualPrice'
+              placeholder='Actual Price'
+              handleChange={handleChange}
+              value={actualPrice}
+              classes='form-group-input'
+            />
 
-            <div className='form-group-product'>
-              <label htmlFor='boughtPrice'>Bought Price</label>
-              <input
-                type='number'
-                required
-                name='boughtPrice'
-                placeholder='Bought Price'
-                onChange={handleChange}
-                value={boughtPrice}
-                tabIndex={1}
-              />
-            </div>
+            <Input
+              classes='form-group-input'
+              type='number'
+              label='Bought Price'
+              name='boughtPrice'
+              placeholder='Bought Price'
+              handleChange={handleChange}
+              value={boughtPrice}
+            />
           </div>
 
           <div className='form-group-category'>

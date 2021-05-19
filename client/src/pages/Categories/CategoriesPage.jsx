@@ -1,11 +1,11 @@
-import { Button, Grid, Typography } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCategories } from '../../redux/category/category.actions';
 import { Category } from '../../components/Categories/category';
 import useStyles from './Categories.page.styles';
-import Add from '@material-ui/icons/Add';
+import { CustomButton } from '../../components/Forms/Button';
 
 export const Categories = () => {
   const { categories } = useSelector((state) => ({
@@ -33,13 +33,7 @@ export const Categories = () => {
     <>
       <div className={classes.btncontainer}>
         <Link to='/addCategory'>
-          <Button
-            startIcon={<Add />}
-            variant='contained'
-            className={classes.addBtn}
-          >
-            Add Category
-          </Button>
+          <CustomButton text='Add Category' />
         </Link>
       </div>
       <Grid container className={classes.root} spacing={2}>
