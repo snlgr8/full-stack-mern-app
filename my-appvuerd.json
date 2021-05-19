@@ -1,45 +1,18 @@
+ALL
 {
-  "category": {
-    "id": 1,
-    "title": "Test",
-    //...other props
-  }
+    category : name - X axis
+    noOfProducts: 100 - Y axis 
+
+}
+
+dropdown to select category: 
+{
+    product: name,
+    
+    cost : 1000
 }
 
 {
-    "product": {
-        id: 1,
-        category: id ,
-        ..other props 
-    }
-}
 
-One product belong to one category.
-Category can hold multiple products
-1- 1 
-1 - many
-C - P
-1- many
-
-
-{
-    category_id , 
-    category_title , 
-    category_tags
-    product_category :[]
-}
-
-{
-    product_id ,
-    product_title ,
-    product_price,
-    product_category
-
-},
-{
-    product_id ,
-    product_title ,
-    product_price,
-    product_category
 
 }

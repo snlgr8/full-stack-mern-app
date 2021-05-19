@@ -1,35 +1,52 @@
 import React from 'react';
-import '../../../node_modules/react-vis/dist/style.css';
 import {
-  XYPlot,
-  LineSeries,
+  FlexibleXYPlot,
+  FlexibleHeightXYPlot,
+  FlexibleWidthXYPlot,
   VerticalBarSeries,
-  VerticalGridLines,
-  HorizontalGridLines,
   XAxis,
   YAxis,
+  XYPlot,
 } from 'react-vis';
+
+import './Reports.css';
+
 export const ReportsPage = () => {
-  const data = [
-    { x: 0, y: 8 },
-    { x: 1, y: 5 },
-    { x: 2, y: 4 },
-    { x: 3, y: 9 },
-    { x: 4, y: 1 },
-    { x: 5, y: 7 },
-    { x: 6, y: 6 },
-    { x: 7, y: 3 },
-    { x: 8, y: 2 },
-    { x: 9, y: 0 },
+  const categoryData = [
+    {
+      x: 'Lipstick',
+      y: 10,
+    },
+    {
+      x: 'Nailpaint',
+      y: 19,
+    },
+    {
+      x: 'Lipstick2',
+      y: 10,
+    },
+    {
+      x: 'Nailpaint2',
+      y: 19,
+    },
+    {
+      x: 'Lipstick3',
+      y: 10,
+    },
+    {
+      x: 'Nailpaint3',
+      y: 19,
+    },
   ];
 
   return (
-    <div>
-      <XYPlot height={500} width={500}>
-        <VerticalBarSeries data={data} />
-        <YAxis />
+    <>
+      <h1>This is reports</h1>
+      <FlexibleWidthXYPlot xType='ordinal' height={400}>
         <XAxis />
-      </XYPlot>
-    </div>
+        <YAxis />
+        <VerticalBarSeries data={categoryData} barWidth={0.5} />
+      </FlexibleWidthXYPlot>
+    </>
   );
 };

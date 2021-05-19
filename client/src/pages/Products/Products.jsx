@@ -1,16 +1,16 @@
+import { css } from '@emotion/core';
 import { Grid, Typography } from '@material-ui/core';
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchProducts } from '../../redux/products/products.actions';
-import { Product } from '../../components/Products/product';
-
 import BounceLoader from 'react-spinners/BounceLoader';
-import { css } from '@emotion/core';
-
-import './Product.style.css';
 import { CustomButton } from '../../components/Forms/Button';
+import { Product } from '../../components/Products/product';
+import { fetchProducts } from '../../redux/products/products.actions';
+import './Product.style.css';
+
+
+
 const override = css`
   display: block;
   margin: 0 auto;
@@ -22,7 +22,7 @@ export const Products = () => {
     items: state.products.items,
   }));
 
-  let [color, setColor] = useState('#96C5BD');
+  const color = '#96C5BD';
 
   const dispatch = useDispatch();
 
