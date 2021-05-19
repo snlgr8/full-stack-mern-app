@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   deleteCategory,
   deleteCategoryAndProducts,
+  updateCategory,
 } from '../../redux/category/category.actions';
 import { CustomDialog } from '../../utils/Dialog';
 import { getImage } from '../../utils/imageDecoding';
@@ -18,12 +19,15 @@ const initialDialogDetailsState = {
   cancelButtonText: 'Cancel',
   maxWidth: 'lg',
 };
-export const Category = ({ category, countOfProducts }) => {
+export const Category = ({ category }) => {
   const dispatch = useDispatch();
   const [isDeleteAll, setIsDeleteAll] = useState(false);
 
   const [dialogDetails, setDialogDetails] = useState(initialDialogDetailsState);
 
+  useEffect(() => {
+    //dispatch(updateCategory(category));
+  }, [category, dispatch]);
   const handleClose = () => {
     setDialogDetails({ open: false });
   };
@@ -39,23 +43,22 @@ export const Category = ({ category, countOfProducts }) => {
     handleClose();
   };
   const setDialogData = () => {
-    if (countOfProducts < 1) {
+    if (category.count < 1) {
       setDialogDetails({
+        ...dialogDetails,
         open: true,
-        dialogContent: 'Are you sure?',
-        dialogTitle: 'Confirm',
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',
         maxWidth: 'xs',
       });
     } else {
       setDialogDetails({
+        ...dialogDetails,
         open: true,
         dialogContent:
           'Cannot remove category, there are products in this category. Do you want to delete ALL products in this category?',
         dialogTitle: 'Warning!',
         confirmButtonText: 'Yes, delete all products',
-        cancelButtonText: 'Cancel',
         maxWidth: 'sm',
       });
       setIsDeleteAll(true);
@@ -80,10 +83,10 @@ export const Category = ({ category, countOfProducts }) => {
       </div>
 
       <div className='category-container__count'>
-        {countOfProducts < 1 ? (
+        {category.count < 1 ? (
           `No Products`
         ) : (
-          <p>Number of products: {countOfProducts}</p>
+          <p>Number of products: {category.count}</p>
         )}
       </div>
       <div className='category-container__delete'>

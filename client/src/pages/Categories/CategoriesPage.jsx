@@ -1,7 +1,8 @@
 import { Grid, Typography } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { fetchProducts } from '../../redux/products/products.actions';
 import { fetchCategories } from '../../redux/category/category.actions';
 import { Category } from '../../components/Categories/category';
 import useStyles from './Categories.page.styles';
@@ -11,6 +12,7 @@ export const Categories = () => {
   const { categories } = useSelector((state) => ({
     categories: state.categories.items,
   }));
+  const [count, setCount] = useState(0);
   const { products } = useSelector((state) => ({
     products: state.products.items,
   }));
@@ -18,15 +20,20 @@ export const Categories = () => {
   const classes = useStyles();
   useEffect(() => {
     dispatch(fetchCategories());
+    if (products.length < 0) {
+      dispatch(fetchProducts());
+    }
   }, [dispatch]);
 
   const countOfProductsPerCategory = (category) => {
     //Fetch products based on category
     // TODO: to add count of products in categories
-    return (
+    const count =
       products &&
-      products.filter((product) => product.category._id === category._id).length
-    );
+      products.filter((product) => product.category._id === category._id)
+        .length;
+
+    return count;
   };
 
   return (
@@ -43,9 +50,11 @@ export const Categories = () => {
         {categories.length > 0 &&
           categories.map((category) => (
             <Category
-              category={category}
+              category={{
+                ...category,
+                count: countOfProductsPerCategory(category),
+              }}
               key={category.id}
-              countOfProducts={countOfProductsPerCategory(category)}
             />
           ))}
       </Grid>

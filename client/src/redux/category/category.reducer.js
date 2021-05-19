@@ -24,6 +24,17 @@ export const categories = (state = initialState, action) => {
       };
     case categoryTypes.FAILURE:
       return { ...state, items: [], error: action.payload };
+
+    case categoryTypes.UPDATE_CATEGORY:
+      return {
+        ...state,
+        items: state.items.map((i) =>
+          i._id === action.payload.id
+            ? { ...i, count: action.payload.count }
+            : i
+        ),
+      };
+
     default:
       return state;
   }

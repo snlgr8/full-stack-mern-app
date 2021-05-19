@@ -16,6 +16,10 @@ export const fetchCategories = () => async (dispatch) => {
     });
 };
 
+export const updateCategory = (category) => async (dispatch) => {
+  dispatch({ type: categoryTypes.UPDATE_CATEGORY, payload: category });
+};
+
 export const addCategory = (category) => async (dispatch) => {
   await api
     .addCategory(category)
