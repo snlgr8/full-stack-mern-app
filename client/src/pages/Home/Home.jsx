@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchCategories } from '../../redux/category/category.actions';
+import {
+  fetchCategories,
+  getCount,
+} from '../../redux/category/category.actions';
 import { fetchProducts } from '../../redux/products/products.actions';
 import './Home.style.css';
 
@@ -9,6 +12,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCategories());
+    dispatch(getCount());
   }, [dispatch]);
 
   return (

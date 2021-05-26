@@ -6,6 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { useDispatch } from 'react-redux';
 import { deleteProduct } from '../../redux/products/products.actions';
 import { getImage } from '../../utils/imageDecoding';
+import { getCount } from '../../redux/category/category.actions';
 
 export const Product = ({ product }) => {
   const dispatch = useDispatch();

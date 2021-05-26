@@ -9,26 +9,19 @@ import { Product } from '../../components/Products/product';
 import { fetchProducts } from '../../redux/products/products.actions';
 import './Product.style.css';
 
-
-
 const override = css`
   display: block;
   margin: 0 auto;
   border-color: green;
 `;
 export const Products = () => {
-  const { isLoading, items } = useSelector((state) => ({
+  const { isLoading, items, categories } = useSelector((state) => ({
     isLoading: state.products.isLoading,
     items: state.products.items,
+    categories: state.categories.items,
   }));
 
   const color = '#96C5BD';
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
 
   return (
     <>
@@ -49,7 +42,17 @@ export const Products = () => {
         )}
         {items.length > 0 &&
           items.map((product) => (
-            <Product product={product} key={product.id} />
+            <Product
+              product={{
+                ...product,
+                category: categories.find((c) =>
+                  product.category._id
+                    ? c._id === product.category._id
+                    : product.category
+                ),
+              }}
+              key={product.id}
+            />
           ))}
       </Grid>
     </>

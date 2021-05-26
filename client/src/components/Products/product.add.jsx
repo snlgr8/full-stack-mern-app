@@ -2,7 +2,10 @@ import { InputLabel, MenuItem, Select } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCategories } from '../../redux/category/category.actions';
+import {
+  fetchCategories,
+  getCount,
+} from '../../redux/category/category.actions';
 import { addProduct } from '../../redux/products/products.actions';
 import { Input } from '../Forms/Input';
 
@@ -29,9 +32,7 @@ export const AddProduct = () => {
   const { categories } = useSelector((state) => ({
     categories: state.categories.items,
   }));
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
+
   const { name, actualPrice, boughtPrice, rating, subtype, category, brand } =
     product;
 
@@ -59,6 +60,7 @@ export const AddProduct = () => {
       formData.append(key, product[key]);
     });
     dispatch(addProduct(formData));
+    dispatch(getCount());
     clearForm();
     event.target.reset();
   };

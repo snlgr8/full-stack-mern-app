@@ -5,10 +5,10 @@ const fs = require('fs');
 
 const getCategories = async (req, res) => {
   const categories = await Category.find();
-  if (categories.length > 0) {
-    return res.send(categories);
-  }
-  return res.status(404).json({ message: 'No data found', success: false });
+
+  return res.send(categories);
+
+  //  return res.status(404).json({ message: 'No data found', success: false });
 };
 const fetchImage = async (req, res) => {
   await Img.findOne({}, 'img createdAt', function (err, img) {
@@ -34,7 +34,7 @@ const addCategory = async (req, res) => {
       .json({ message: 'Category already exists', success: false });
   }
 
-  var category = {
+  var newCategory = {
     title,
     subtype,
     tags,
@@ -43,11 +43,11 @@ const addCategory = async (req, res) => {
       contentType: 'image/jpeg',
     },
   };
-  Category.create(category, (err, item) => {
+  Category.create(newCategory, (err, category) => {
     if (err) {
       res.status(500).json({ success: false, message: err });
     } else {
-      item
+      category
         .save()
         .then(() => {
           return res.status(200).json({
@@ -91,6 +91,23 @@ const deleteCategoryAndProducts = async (req, res) => {
         .json({ message: 'Unable to delete category', success: false });
     });
 };
+
+const getCount = async (req, res) => {
+  const allCategories = await Category.find();
+  const categoryIds = allCategories.map((category) => {
+    return category._id;
+  });
+  const c = await categoryIds.map(async (category) => ({
+    id: category._id,
+    count: await getProductCount(category._id),
+  }));
+  const result = await Promise.all(c);
+  res.send(result);
+};
+
+const getProductCount = async (id) => {
+  return await Product.countDocuments({ category: id });
+};
 const updateCategory = async (category, res) => {
   const { id } = category;
   Category.findByIdAndUpdate({ _id: id }, category, { new: false })
@@ -124,4 +141,5 @@ module.exports = {
   updateCategory,
   getSubtype,
   deleteCategoryAndProducts,
+  getCount,
 };

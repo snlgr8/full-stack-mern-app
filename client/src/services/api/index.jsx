@@ -38,3 +38,7 @@ export const deleteCategoryAndProducts = (category) => {
 export const addCategory = (category) => {
   return axios.post(`${BASE_URL}/categories/addCategory`, category);
 };
+
+export const getCount = () => {
+  return axios.get(`${BASE_URL}/categories/getCount`);
+};

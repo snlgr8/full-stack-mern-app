@@ -17,3 +17,5 @@ export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
 
 export const FETCH_SUBTYPE = 'FETCH_SUBTYPE';
+
+export const GET_COUNT = 'GET_COUNT';

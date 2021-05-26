@@ -4,6 +4,7 @@ const {
   updateCategory,
   addCategory,
   getSubtype,
+  getCount,
   deleteCategoryAndProducts,
 } = require('../controllers/Categories');
 
@@ -39,11 +40,14 @@ router.post('/deleteCategoryAndProducts', async (req, res) => {
 router.post('/updateCategory', async (req, res) => {
   await updateCategory(req.body, res);
 });
-
+router.get('/getCount', async (req, res) => {
+  await getCount(req, res);
+});
 /**
  * @DESC Get subtype based on category id
  */
 router.get('/:id', async (req, res) => {
   await getSubtype(req.params.id, res);
 });
+
 module.exports = router;

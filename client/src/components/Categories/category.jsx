@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import DeleteIcon from '@material-ui/icons/Delete';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   deleteCategory,
-  deleteCategoryAndProducts,
-  updateCategory,
+  deleteCategoryAndProducts
 } from '../../redux/category/category.actions';
 import { CustomDialog } from '../../utils/Dialog';
 import { getImage } from '../../utils/imageDecoding';
-
-import DeleteIcon from '@material-ui/icons/Delete';
-
 import './category.style.css';
+
+
 const initialDialogDetailsState = {
   open: false,
   dialogContent: 'Are you sure?',
@@ -25,9 +24,6 @@ export const Category = ({ category }) => {
 
   const [dialogDetails, setDialogDetails] = useState(initialDialogDetailsState);
 
-  useEffect(() => {
-    //dispatch(updateCategory(category));
-  }, [category, dispatch]);
   const handleClose = () => {
     setDialogDetails({ open: false });
   };

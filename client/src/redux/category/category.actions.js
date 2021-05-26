@@ -5,7 +5,6 @@ export const fetchCategories = () => async (dispatch) => {
   await api
     .fetchCategories()
     .then(({ data }) => {
-      console.log(data);
       dispatch({ type: categoryTypes.FETCH_CATEGORIES, payload: data });
     })
     .catch((error) => {
@@ -58,4 +57,11 @@ export const deleteCategory = (category) => async (dispatch) => {
         payload: error.response.data.message,
       });
     });
+};
+
+export const getCount = () => async (dispatch) => {
+  await api.getCount().then(({ data }) => {
+    console.log(data);
+    dispatch({ type: categoryTypes.GET_COUNT, payload: data });
+  });
 };
