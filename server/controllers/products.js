@@ -8,10 +8,7 @@ const getProducts = async (req, res) => {
     //category is the name of the field in Proucts.
     .populate('category');
 
-  if (products.length > 0) {
-    return res.status(200).json(products);
-  }
-  return res.status(404).json({ message: 'No data found', success: false });
+  return res.status(200).json(products);
 };
 const addProduct = async (req, res) => {
   const product = req.body;

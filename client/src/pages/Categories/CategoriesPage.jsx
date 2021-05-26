@@ -12,12 +12,15 @@ import useStyles from './Categories.page.styles';
 import { CustomButton } from '../../components/Forms/Button';
 
 export const Categories = () => {
+  const dispatch = useDispatch();
   const { categories } = useSelector((state) => ({
     categories: state.categories.items,
   }));
 
-
-  
+  useEffect(() => {
+    dispatch(fetchCategories());
+    dispatch(getCount());
+  }, []);
 
   const classes = useStyles();
 

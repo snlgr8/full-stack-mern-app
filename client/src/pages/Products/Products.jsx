@@ -20,8 +20,12 @@ export const Products = () => {
     items: state.products.items,
     categories: state.categories.items,
   }));
-
+  const dispatch = useDispatch();
   const color = '#96C5BD';
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
 
   return (
     <>
