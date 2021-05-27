@@ -14,16 +14,11 @@ export const user = (state = userState, action) => {
   switch (action.type) {
     case REGISTER_USER:
     case LOGIN_USER:
-      localStorage.setItem(
-        'currentUser',
-        JSON.stringify({ ...action.payload })
-      );
+      localStorage.setItem('currentUser', JSON.stringify(action.payload));
       return { ...state, currentUser: action.payload, error: null };
-
     case REGISTER_USER_FAILED:
     case LOGIN_USER_FAILED:
       return { error: action.payload, currentUser: null };
-
     case LOGOUT_USER:
       localStorage.removeItem('currentUser');
       return { ...state, currentUser: null, error: null };

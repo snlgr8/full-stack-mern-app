@@ -15,27 +15,31 @@ import { menu } from '../../utils/navigation-menu.data';
 import useStyles, { ToolbarContainer } from './Navbar.styles';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 export const Navbar = () => {
+  console.log(JSON.parse(localStorage.getItem('currentUser')));
   const classes = useStyles();
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem('currentUser'))
   );
+
   const dispatch = useDispatch();
   const location = useLocation();
 
   const history = useHistory();
+
   const logout = () => {
     dispatch(logoutUser(history));
     setCurrentUser(null);
   };
+
   useEffect(() => {
     const token = currentUser?.token;
 
     if (token) {
       const decodedToken = decode(token);
-
-      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        logout();
+      }
     }
-
     setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
   }, [location]);
 

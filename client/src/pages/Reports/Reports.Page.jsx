@@ -14,34 +14,36 @@ import './Reports.css';
 export const ReportsPage = () => {
   const categoryData = [
     {
-      x: 'Lipstick',
+      x: 'Cat1',
       y: 10,
     },
     {
-      x: 'Nailpaint',
+      x: 'Cat2',
       y: 19,
     },
     {
-      x: 'Lipstick2',
+      x: 'Cat3',
       y: 10,
     },
     {
-      x: 'Nailpaint2',
+      x: 'Cat4',
       y: 19,
     },
     {
-      x: 'Lipstick3',
+      x: 'Cat5',
       y: 10,
     },
     {
-      x: 'Nailpaint3',
+      x: 'Cat6',
       y: 19,
     },
   ];
 
   return (
     <>
-      <h1>This is reports</h1>
+      <div className='report-title'>
+        <h3>Data analysis</h3>
+      </div>
       <FlexibleWidthXYPlot xType='ordinal' height={400}>
         <XAxis />
         <YAxis />

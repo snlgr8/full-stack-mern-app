@@ -28,10 +28,8 @@ export const loginUser = (user, history) => async (dispatch) => {
   await api
     .loginUser(user)
     .then(({ data }) => {
-      if (data?.success) {
-        history.push('/');
-        dispatch({ type: LOGIN_USER, payload: data });
-      }
+      dispatch({ type: LOGIN_USER, payload: data });
+      history.push('/');
     })
     .catch((err) => {
       if (err.response) {

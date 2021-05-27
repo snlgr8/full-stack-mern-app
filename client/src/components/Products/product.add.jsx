@@ -22,6 +22,7 @@ const initialState = {
 };
 
 export const AddProduct = () => {
+  const [isValidated, setIsValidated] = useState(false);
   const [product, setProduct] = useState(initialState);
   const [subtypes, setSubtypes] = useState([]);
   const [isCategorySelected, setIsCategorySelected] = useState(true);

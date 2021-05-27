@@ -9,15 +9,17 @@ import './login.css';
 export const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+
   const { error } = useSelector((state) => ({
     error: state.user.error,
   }));
+
   const [userCredentials, setUserCredentials] = useState({
     email: '',
     password: '',
   });
+
   const { email, password } = userCredentials;
-  //const [error, setError] = useState('');
 
   useEffect(() => {
     if (localStorage.getItem('token')) {

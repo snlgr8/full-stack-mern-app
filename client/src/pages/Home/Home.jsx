@@ -5,6 +5,7 @@ import {
   getCount,
 } from '../../redux/category/category.actions';
 import { fetchProducts } from '../../redux/products/products.actions';
+import { ReportsPage } from '../Reports/Reports.Page';
 import './Home.style.css';
 
 const Home = () => {
@@ -17,7 +18,7 @@ const Home = () => {
 
   return (
     <div className='home-container'>
-      <h1>Welcome</h1>
+      <ReportsPage />
     </div>
   );
 };
