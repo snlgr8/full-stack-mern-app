@@ -39,8 +39,8 @@ export const Navbar = () => {
       if (decodedToken.exp * 1000 < new Date().getTime()) {
         logout();
       }
+      setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
     }
-    setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
   }, [location]);
 
   return (

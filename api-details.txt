@@ -12,6 +12,8 @@ data : {
     email :'',
     password :'',
 }
+
+
 returns token
 To remove background: 
 //https://www.remove.bg/upload
